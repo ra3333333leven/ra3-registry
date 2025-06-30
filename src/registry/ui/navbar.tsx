@@ -36,7 +36,7 @@ function NavBar({
         className
       )}
     >
-      <div className="flex items-center gap-3 bg-background/5 border border-border backdrop-blur-sm py-1 px-1 rounded-full shadow-lg">
+      <div className="flex items-center gap-3 bg-background/10 border border-border backdrop-blur-sm py-1 px-1 rounded-full shadow-lg">
         {navigationItems.map((item) => {
           const isActive = activeTab === item.name
 
@@ -55,7 +55,7 @@ function NavBar({
               {isActive && (
                 <motion.div
                   layoutId="lamp"
-                  className="absolute inset-0 w-full bg-primary/5 rounded-full -z-10"
+                  className="absolute inset-0 w-full bg-primary/10 rounded-full -z-10"
                   initial={false}
                   transition={{
                     type: 'spring',

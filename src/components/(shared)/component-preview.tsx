@@ -1,5 +1,9 @@
+'use client'
+
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { cn } from '@/lib/utils'
+import { CopyClip } from '@/registry/ui/copy-clip'
+import { useTheme } from 'next-themes'
 import { Highlight, themes } from 'prism-react-renderer'
 import * as React from 'react'
 
@@ -18,6 +22,13 @@ export function ComponentPreview({
   align = 'center',
   ...props
 }: ComponentPreviewProps) {
+  const { resolvedTheme } = useTheme()
+
+  const tabs = [
+    { value: 'preview', label: 'Preview' },
+    { value: 'code', label: 'Code' },
+  ]
+
   return (
     <div
       className={cn('relative my-4 flex flex-col space-y-2', className)}
@@ -26,18 +37,15 @@ export function ComponentPreview({
       <Tabs defaultValue="preview" className="relative mr-auto w-full">
         <div className="flex items-center justify-between pb-3">
           <TabsList className="w-full justify-start rounded-none border-b bg-transparent p-0">
-            <TabsTrigger
-              value="preview"
-              className="relative h-9 rounded-none border-b-2 border-b-transparent bg-transparent px-4 pb-3 pt-2 font-semibold text-muted-foreground shadow-none transition-none data-[state=active]:border-b-primary data-[state=active]:text-foreground data-[state=active]:shadow-none"
-            >
-              Preview
-            </TabsTrigger>
-            <TabsTrigger
-              value="code"
-              className="relative h-9 rounded-none border-b-2 border-b-transparent bg-transparent px-4 pb-3 pt-2 font-semibold text-muted-foreground shadow-none transition-none data-[state=active]:border-b-primary data-[state=active]:text-foreground data-[state=active]:shadow-none"
-            >
-              Code
-            </TabsTrigger>
+            {tabs.map((tab) => (
+              <TabsTrigger
+                key={tab.value}
+                value={tab.value}
+                className="relative h-9 rounded-none border-0 border-b-2 border-b-transparent bg-transparent px-4 pb-3 pt-2 font-semibold text-muted-foreground shadow-none transition-none data-[state=active]:border-b-primary data-[state=active]:text-foreground data-[state=active]:shadow-none data-[state=active]:bg-transparent dark:data-[state=active]:bg-transparent"
+              >
+                {tab.label}
+              </TabsTrigger>
+            ))}
           </TabsList>
         </div>
 
@@ -56,9 +64,14 @@ export function ComponentPreview({
 
         <TabsContent value="code">
           <div className="flex flex-col space-y-4">
-            <div className="w-full rounded-md overflow-hidden">
+            <div className="w-full rounded-md overflow-hidden relative">
+              <div className="absolute top-4 right-4 z-10">
+                <CopyClip variant="outline" textToCopy={code.trim()} />
+              </div>
               <Highlight
-                theme={themes.github}
+                theme={
+                  resolvedTheme === 'dark' ? themes.dracula : themes.github
+                }
                 code={code.trim()}
                 language={language}
               >
@@ -71,7 +84,7 @@ export function ComponentPreview({
                 }) => (
                   <pre
                     className={cn(
-                      'mb-4 mt-6 max-h-[650px] overflow-x-auto rounded-lg border py-4 px-4 text-sm',
+                      'w-full max-h-[650px] overflow-x-auto rounded-lg border py-4 px-4 text-sm',
                       prismClassName
                     )}
                     style={style}

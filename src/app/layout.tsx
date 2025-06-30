@@ -3,6 +3,7 @@ import { CirclePower, FileText, Home, Loader } from 'lucide-react'
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import { ThemeProvider } from '@/components/(shared)/theme-provider'
+import { Toaster } from 'sonner'
 import './globals.css'
 
 const geistSans = Geist({
@@ -45,6 +46,7 @@ export default function RootLayout({
         >
           <NavBar navigationItems={navigationItems} withThemeToggle />
           {children}
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>
