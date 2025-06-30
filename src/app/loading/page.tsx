@@ -1,5 +1,5 @@
 import { PlaceholderContentPage } from '@/registry/ui/placeholder'
 
-export default function HomePage() {
+export default function LoadingPage() {
   return <PlaceholderContentPage />
 }
