@@ -41,7 +41,7 @@ export function ComponentPreview({
               <TabsTrigger
                 key={tab.value}
                 value={tab.value}
-                className="relative h-9 rounded-none border-0 border-b-2 border-b-transparent bg-transparent px-4 pb-3 pt-2 font-semibold text-muted-foreground shadow-none transition-none data-[state=active]:border-b-primary data-[state=active]:text-foreground data-[state=active]:shadow-none data-[state=active]:bg-transparent dark:data-[state=active]:bg-transparent"
+                className="text-base relative h-9 rounded-none border-0 border-b-2 border-b-transparent bg-transparent px-4 pb-3 pt-2 font-semibold text-muted-foreground shadow-none transition-none data-[state=active]:border-b-primary data-[state=active]:text-foreground data-[state=active]:shadow-none data-[state=active]:bg-transparent dark:data-[state=active]:bg-transparent"
               >
                 {tab.label}
               </TabsTrigger>
@@ -55,7 +55,8 @@ export function ComponentPreview({
               'preview flex min-h-[350px] w-full items-center justify-center p-10',
               align === 'start' && 'justify-start',
               align === 'end' && 'justify-end',
-              'rounded-md border'
+              'rounded-md border',
+              'bg-gradient-to-br from-background via-muted/40 to-muted/60'
             )}
           >
             {preview}
@@ -70,7 +71,7 @@ export function ComponentPreview({
               </div>
               <Highlight
                 theme={
-                  resolvedTheme === 'dark' ? themes.dracula : themes.github
+                  resolvedTheme === 'dark' ? themes.oneDark : themes.github
                 }
                 code={code.trim()}
                 language={language}
@@ -84,7 +85,7 @@ export function ComponentPreview({
                 }) => (
                   <pre
                     className={cn(
-                      'w-full max-h-[650px] overflow-x-auto rounded-lg border py-4 px-4 text-sm',
+                      'w-full max-h-[650px] overflow-x-auto rounded-lg border py-4 px-4',
                       prismClassName
                     )}
                     style={style}

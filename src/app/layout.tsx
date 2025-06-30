@@ -1,8 +1,8 @@
+import { ThemeProvider } from '@/components/(shared)/theme-provider'
 import { NavBar } from '@/registry/ui/navbar'
-import { CirclePower, FileText, Home, Loader } from 'lucide-react'
+import { CirclePower, Home, Loader, Navigation } from 'lucide-react'
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
-import { ThemeProvider } from '@/components/(shared)/theme-provider'
 import { Toaster } from 'sonner'
 import './globals.css'
 
@@ -25,7 +25,7 @@ const navigationItems = [
   { name: 'Home', href: '/', icon: <Home /> },
   { name: 'Button', href: '/button', icon: <CirclePower /> },
   { name: 'Loading', href: '/loading', icon: <Loader /> },
-  { name: 'Placeholder', href: '/placeholder', icon: <FileText /> },
+  { name: 'NavBar', href: '/navbar', icon: <Navigation /> },
 ]
 
 export default function RootLayout({

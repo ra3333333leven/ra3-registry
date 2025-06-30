@@ -1,0 +1,20 @@
+{
+  "name": "theme-set",
+  "type": "registry:ui",
+  "description": "A collection of theme-related components including ThemeProvider, ThemeDropdown, and ThemeToggle",
+  "dependencies": [
+    "next-themes",
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "dropdown-menu",
+    "button"
+  ],
+  "files": [
+    {
+      "path": "ui/theme-set.tsx",
+      "content": "export { ThemeProvider } from '@/components/(shared)/theme-provider'\nexport { ThemeDropdown } from '@/components/(shared)/theme-dropdown'\nexport { ThemeToggle } from '@/components/(shared)/theme-toggle'\n",
+      "type": "registry:ui"
+    }
+  ]
+}

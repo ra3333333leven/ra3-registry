@@ -4,7 +4,8 @@ import { cn } from '@/lib/utils'
 import { motion } from 'framer-motion'
 import type { Url } from 'next/dist/shared/lib/router/router'
 import Link from 'next/link'
-import { useState } from 'react'
+import { usePathname } from 'next/navigation'
+import { useState, useEffect } from 'react'
 import { useIsMobile } from '@/registry/hooks/use-is-mobile'
 import { ThemeToggle } from '@/components/(shared)/theme-toggle'
 
@@ -25,8 +26,21 @@ function NavBar({
   className,
   withThemeToggle = false,
 }: NavBarProps) {
-  const [activeTab, setActiveTab] = useState('Home')
+  const [activeTab, setActiveTab] = useState<string | null>(null)
+  const pathname = usePathname()
   const isMobile = useIsMobile()
+
+  // Set active tab based on current pathname on mount
+  useEffect(() => {
+    const activeItem = navigationItems.find((item) =>
+      typeof item.href === 'string'
+        ? item.href === pathname
+        : item.href.pathname === pathname
+    )
+    if (activeItem) {
+      setActiveTab(activeItem.name)
+    }
+  }, [pathname, navigationItems])
 
   return (
     <div

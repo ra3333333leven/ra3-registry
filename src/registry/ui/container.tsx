@@ -26,7 +26,13 @@ function FullPage({
   debug = DEFAULT_DEBUG,
 }: ContainerProps) {
   return (
-    <div className={cn('h-full w-full', debug && DEBUG_BORDER, className)}>
+    <div
+      className={cn(
+        'h-full w-full overflow-x-hidden',
+        debug && DEBUG_BORDER,
+        className
+      )}
+    >
       {children}
     </div>
   )
