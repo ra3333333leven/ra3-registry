@@ -2,6 +2,7 @@ import { NavBar } from '@/registry/ui/navbar'
 import { CirclePower, FileText, Home, Loader } from 'lucide-react'
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
+import { ThemeProvider } from '@/components/(shared)/theme-provider'
 import './globals.css'
 
 const geistSans = Geist({
@@ -32,12 +33,19 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <NavBar navigationItems={navigationItems} />
-        {children}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <NavBar navigationItems={navigationItems} withThemeToggle />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   )

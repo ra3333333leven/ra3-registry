@@ -6,6 +6,7 @@ import type { Url } from 'next/dist/shared/lib/router/router'
 import Link from 'next/link'
 import { useState } from 'react'
 import { useIsMobile } from '@/registry/hooks/use-is-mobile'
+import { ThemeToggle } from '@/components/(shared)/theme-toggle'
 
 export interface NavigationItem {
   name: string // Required
@@ -16,9 +17,14 @@ export interface NavigationItem {
 export interface NavBarProps {
   navigationItems: NavigationItem[]
   className?: string
+  withThemeToggle?: boolean
 }
 
-function NavBar({ navigationItems, className }: NavBarProps) {
+function NavBar({
+  navigationItems,
+  className,
+  withThemeToggle = false,
+}: NavBarProps) {
   const [activeTab, setActiveTab] = useState('Home')
   const isMobile = useIsMobile()
 
@@ -40,8 +46,8 @@ function NavBar({ navigationItems, className }: NavBarProps) {
               href={item.href}
               onClick={() => setActiveTab(item.name)}
               className={cn(
-                'relative cursor-pointer text-sm font-semibold px-6 py-2 rounded-full transition-colors',
-                'text-foreground/80 hover:text-primary',
+                'relative cursor-pointer text-base font-semibold px-6 py-2 rounded-full transition-colors',
+                'text-foreground hover:text-primary',
                 isActive && 'bg-muted text-primary'
               )}
             >
@@ -61,6 +67,7 @@ function NavBar({ navigationItems, className }: NavBarProps) {
             </Link>
           )
         })}
+        {withThemeToggle && <ThemeToggle />}
       </div>
     </div>
   )
