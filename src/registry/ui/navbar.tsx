@@ -47,7 +47,7 @@ function NavBar({
               onClick={() => setActiveTab(item.name)}
               className={cn(
                 'relative cursor-pointer text-base font-semibold px-6 py-2 rounded-full transition-colors',
-                'text-foreground hover:text-primary',
+                'text-foreground hover:text-primary hover:bg-muted/60',
                 isActive && 'bg-muted text-primary'
               )}
             >

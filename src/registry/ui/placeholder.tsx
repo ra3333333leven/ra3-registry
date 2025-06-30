@@ -1,8 +1,8 @@
 // Replace this with something more dynamic, use lorem ipsum generators etc...
 function PlaceholderContentPage() {
   return (
-    <div className="min-h-screen">
-      <div className="py-24 px-6">
+    <div className="min-h-screen flex justify-center">
+      <div className="max-w-4xl py-24 px-6">
         <h1 className="text-4xl font-bold mb-8">Welcome to Home</h1>
 
         {/* Generate lots of content to test scrolling */}
