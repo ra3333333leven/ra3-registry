@@ -8,7 +8,7 @@ export const registry: Registry = [
       'A responsive navigation bar with smooth animations and theme toggle support',
     files: [{ path: 'ui/navbar.tsx', type: 'registry:ui' }],
     dependencies: ['framer-motion'],
-    registryDependencies: ['use-is-mobile', 'theme-set'],
+    // registryDependencies: ['use-is-mobile', 'theme-set'],
   },
   {
     name: 'use-is-mobile',
