@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils'
 import { CopyClip } from '@/registry/ra3-ui/copy-clip'
 import { useTheme } from 'next-themes'
 import { Highlight, themes } from 'prism-react-renderer'
+import { motion } from 'motion/react'
 import * as React from 'react'
 
 interface ComponentPreviewProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -23,6 +24,7 @@ export function ComponentPreview({
   ...props
 }: ComponentPreviewProps) {
   const { resolvedTheme } = useTheme()
+  const [activeTab, setActiveTab] = React.useState('preview')
 
   const tabs = [
     { value: 'preview', label: 'Preview' },
@@ -34,23 +36,43 @@ export function ComponentPreview({
       className={cn('relative my-4 flex flex-col space-y-2', className)}
       {...props}
     >
-      <Tabs defaultValue="preview" className="relative mr-auto w-full">
+      <Tabs
+        defaultValue="preview"
+        className="relative mr-auto w-full"
+        onValueChange={setActiveTab}
+      >
         <div className="flex items-center justify-between pb-3">
           <TabsList className="w-full justify-start rounded-none border-b bg-transparent p-0">
             {tabs.map((tab) => (
               <TabsTrigger
                 key={tab.value}
                 value={tab.value}
-                className="text-base relative h-9 rounded-none border-0 border-b-2 border-b-transparent bg-transparent px-4 pb-3 pt-2 font-semibold text-muted-foreground shadow-none transition-none data-[state=active]:border-b-primary data-[state=active]:text-foreground data-[state=active]:shadow-none data-[state=active]:bg-transparent dark:data-[state=active]:bg-transparent"
+                className="text-base relative h-9 rounded-none border-0 border-b-transparent bg-transparent px-4 pb-3 pt-2 font-semibold text-muted-foreground shadow-none transition-colors duration-200 data-[state=active]:border-b-transparent data-[state=active]:text-foreground data-[state=active]:shadow-none data-[state=active]:bg-transparent dark:data-[state=active]:bg-transparent"
               >
                 {tab.label}
+                {activeTab === tab.value && (
+                  <motion.div
+                    className="absolute inset-x-0 bottom-[1px] mx-auto h-0.5 bg-primary"
+                    layoutId="activeTabIndicator"
+                    initial={false}
+                    transition={{
+                      type: 'spring',
+                      stiffness: 500,
+                      damping: 30,
+                    }}
+                  />
+                )}
               </TabsTrigger>
             ))}
           </TabsList>
         </div>
 
         <TabsContent value="preview" className="relative rounded-md">
-          <div
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.2 }}
             className={cn(
               'preview flex min-h-[350px] w-full items-center justify-center p-10',
               align === 'start' && 'justify-start',
@@ -60,11 +82,17 @@ export function ComponentPreview({
             )}
           >
             {preview}
-          </div>
+          </motion.div>
         </TabsContent>
 
         <TabsContent value="code">
-          <div className="flex flex-col space-y-4">
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.2 }}
+            className="flex flex-col space-y-4"
+          >
             <div className="w-full rounded-md overflow-hidden relative">
               <div className="absolute top-4 right-4 z-10">
                 <CopyClip variant="outline" textToCopy={code.trim()} />
@@ -101,7 +129,7 @@ export function ComponentPreview({
                 )}
               </Highlight>
             </div>
-          </div>
+          </motion.div>
         </TabsContent>
       </Tabs>
     </div>

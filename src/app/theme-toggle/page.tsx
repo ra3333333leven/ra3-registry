@@ -63,7 +63,7 @@ export default function Example() {
 export default function ThemeTogglePage() {
   return (
     <DemoPage
-      componentName="ThemeToggle"
+      componentName="Theme Toggle"
       componentDescription="A simple toggle button for switching between light and dark themes with smooth transitions."
       previewContent={<ThemeTogglePreview />}
       codeExample={codeExample}

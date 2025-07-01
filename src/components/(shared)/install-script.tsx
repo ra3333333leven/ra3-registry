@@ -17,8 +17,8 @@ export function InstallScript({
   const registryUrl = `${process.env.NEXT_PUBLIC_URL}/registry/${componentName}.json`
 
   const commandMap = {
-    npm: `npx shadcn@latest add ${registryUrl}`,
     pnpm: `pnpm dlx shadcn@latest add ${registryUrl}`,
+    npm: `npx shadcn@latest add ${registryUrl}`,
   }
 
   const scriptComponent = (

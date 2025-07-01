@@ -9,6 +9,41 @@ import { toInternalRegistryUrl } from '@/lib/utils'
  */
 export const registry: Registry = [
   {
+    name: 'button',
+    type: 'registry:ui',
+    description:
+      'An extended button component based on shadcn/ui button with additional customization',
+    files: [{ path: 'ra3-ui/button.tsx', type: 'registry:ui' }],
+    registryDependencies: ['button'],
+  },
+  {
+    name: 'container',
+    type: 'registry:ui',
+    description:
+      'A collection of responsive container components for consistent page layouts and spacing',
+    files: [{ path: 'ra3-ui/container.tsx', type: 'registry:ui' }],
+  },
+  {
+    name: 'copy-clip',
+    type: 'registry:ui',
+    description:
+      'A reusable component that provides copy-to-clipboard functionality with visual feedback',
+    files: [{ path: 'ra3-ui/copy-clip.tsx', type: 'registry:ui' }],
+    dependencies: ['lucide-react'],
+    registryDependencies: [
+      'button',
+      toInternalRegistryUrl('use-copy-to-clipboard'),
+    ],
+  },
+  {
+    name: 'loading',
+    type: 'registry:ui',
+    description:
+      'Loading spinner components with various sizes and a full-page loading component',
+    files: [{ path: 'ra3-ui/loading.tsx', type: 'registry:ui' }],
+    dependencies: ['lucide-react'],
+  },
+  {
     name: 'navbar',
     type: 'registry:ui',
     description:
@@ -16,6 +51,14 @@ export const registry: Registry = [
     files: [{ path: 'ra3-ui/navbar.tsx', type: 'registry:ui' }],
     dependencies: ['framer-motion'],
     registryDependencies: ['use-mobile', toInternalRegistryUrl('theme-toggle')],
+  },
+  {
+    name: 'placeholder',
+    type: 'registry:ui',
+    description:
+      'A placeholder page component with sample content for demonstrating layouts',
+    files: [{ path: 'ra3-ui/placeholder.tsx', type: 'registry:ui' }],
+    registryDependencies: [toInternalRegistryUrl('container')],
   },
   {
     name: 'theme-provider',
@@ -54,5 +97,13 @@ export const registry: Registry = [
     ],
     dependencies: ['next-themes', 'lucide-react'],
     registryDependencies: ['dropdown-menu', 'button'],
+  },
+  {
+    name: 'use-copy-to-clipboard',
+    type: 'registry:hook',
+    description:
+      'A custom hook for copying text to clipboard with toast notifications',
+    files: [{ path: 'hooks/use-copy-to-clipboard.ts', type: 'registry:hook' }],
+    dependencies: ['sonner'],
   },
 ]

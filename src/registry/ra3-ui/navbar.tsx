@@ -37,9 +37,7 @@ function NavBar({
         ? item.href === pathname
         : item.href.pathname === pathname
     )
-    if (activeItem) {
-      setActiveTab(activeItem.name)
-    }
+    setActiveTab(activeItem?.name || null)
   }, [pathname, navigationItems])
 
   return (
