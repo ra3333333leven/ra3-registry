@@ -18,12 +18,43 @@ export const registry: Registry = [
     registryDependencies: ['use-mobile', toInternalRegistryUrl('theme-set')],
   },
   {
+    name: 'theme-provider',
+    type: 'registry:ui',
+    description:
+      'A theme provider component wrapping next-themes ThemeProvider',
+    files: [{ path: 'ra3-ui/theme-provider.tsx', type: 'registry:ui' }],
+    dependencies: ['next-themes'],
+  },
+  {
+    name: 'theme-dropdown',
+    type: 'registry:ui',
+    description:
+      'A dropdown menu for theme selection with light, dark, and system options',
+    files: [{ path: 'ra3-ui/theme-dropdown.tsx', type: 'registry:ui' }],
+    dependencies: ['next-themes', 'lucide-react'],
+    registryDependencies: ['dropdown-menu', 'button'],
+  },
+  {
+    name: 'theme-toggle',
+    type: 'registry:ui',
+    description:
+      'A simple toggle button for switching between light and dark themes',
+    files: [{ path: 'ra3-ui/theme-toggle.tsx', type: 'registry:ui' }],
+    dependencies: ['next-themes', 'lucide-react'],
+  },
+  {
     name: 'theme-set',
     type: 'registry:ui',
     description:
       'A collection of theme-related components including ThemeProvider, ThemeDropdown, and ThemeToggle',
     files: [{ path: 'ra3-ui/theme-set.tsx', type: 'registry:ui' }],
     dependencies: ['next-themes', 'lucide-react'],
-    registryDependencies: ['dropdown-menu', 'button'],
+    registryDependencies: [
+      'dropdown-menu',
+      'button',
+      toInternalRegistryUrl('theme-provider'),
+      toInternalRegistryUrl('theme-dropdown'),
+      toInternalRegistryUrl('theme-toggle'),
+    ],
   },
 ]

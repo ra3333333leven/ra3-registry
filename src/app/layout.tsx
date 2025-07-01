@@ -1,4 +1,4 @@
-import { ThemeProvider } from '@/components/(shared)/theme-provider'
+import { ThemeProvider } from '@/registry/ra3-ui/theme-provider'
 import { NavBar } from '@/registry/ra3-ui/navbar'
 import { CirclePower, Home, Loader, Navigation } from 'lucide-react'
 import type { Metadata } from 'next'
