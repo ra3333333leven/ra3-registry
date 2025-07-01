@@ -1,14 +1,18 @@
+import { TitleDesc } from '@/components/(shared)/title-desc'
 import { PageContainer } from './container'
 
 // Replace this with something more dynamic, use lorem ipsum generators etc...
 function PlaceholderContentPage() {
   return (
     <PageContainer>
-      <h1 className="text-4xl font-bold mb-8">Welcome to Home</h1>
+      <TitleDesc
+        title="Welcome to Home"
+        description="This is a placeholder page to demonstrate the layout and scrolling behavior of the application."
+      />
 
       {/* Generate lots of content to test scrolling */}
       {Array.from({ length: 20 }, (_, i) => (
-        <div key={i} className="mb-8 p-6 bg-card rounded-lg border">
+        <div key={i} className="mt-6 mb-8 p-6 bg-card rounded-lg border">
           <h2 className="text-2xl font-semibold mb-4">Section {i + 1}</h2>
           <p className="text-muted-foreground mb-4">
             This is section {i + 1} with some content to demonstrate scrolling

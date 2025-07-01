@@ -2,7 +2,7 @@ import { cn } from '@/lib/utils'
 import { ReactNode } from 'react'
 
 // Configuration constants for consistent spacing and sizing across the project
-const Y_PADDING = 'pt-4 pb-32 md:py-32' // Vertical padding for page sections - adjust per project needs
+const Y_PADDING = 'pt-4 pb-32 md:p-32' // Vertical padding for page sections - adjust per project needs
 const WIDTH = 'px-4 md:max-w-5xl mx-auto' // Maximum width constraint for content - adjust per project needs
 const FLEX_COL_GAP = 'gap-8' // Gap spacing for flex column layouts - adjust per project needs
 const DEBUG_BORDER = 'border-2 border-red-500' // Debug border styling for development
@@ -29,7 +29,7 @@ function FlexColSpacing({
   return (
     <div
       className={cn(
-        'flex flex-col h-full w-full',
+        'flex flex-col',
         FLEX_COL_GAP,
         debug && DEBUG_BORDER,
         className
@@ -51,13 +51,7 @@ function FullPage({
   debug = DEFAULT_DEBUG,
 }: ContainerProps) {
   return (
-    <div
-      className={cn(
-        'h-full w-full overflow-x-hidden',
-        debug && DEBUG_BORDER,
-        className
-      )}
-    >
+    <div className={cn('overflow-x-hidden', debug && DEBUG_BORDER, className)}>
       {children}
     </div>
   )
@@ -74,7 +68,14 @@ function YPadding({
   debug = DEFAULT_DEBUG,
 }: ContainerProps) {
   return (
-    <div className={cn('h-full', Y_PADDING, debug && DEBUG_BORDER, className)}>
+    <div
+      className={cn(
+        'overflow-y-auto',
+        Y_PADDING,
+        debug && DEBUG_BORDER,
+        className
+      )}
+    >
       {children}
     </div>
   )
@@ -92,9 +93,7 @@ function FixedWidth({
   debug = DEFAULT_DEBUG,
 }: ContainerProps) {
   return (
-    <div
-      className={cn('w-full h-full', WIDTH, debug && DEBUG_BORDER, className)}
-    >
+    <div className={cn('', WIDTH, debug && DEBUG_BORDER, className)}>
       {children}
     </div>
   )
