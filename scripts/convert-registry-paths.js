@@ -35,20 +35,25 @@ jsonFiles.forEach((filename) => {
     // Track if any changes were made
     let hasChanges = false
 
-    // Fix file paths in the files array
+    // Fix file paths and add target properties
     if (jsonData.files && Array.isArray(jsonData.files)) {
       jsonData.files.forEach((file) => {
+        // Convert ui/ paths to ra3-ui/ and add target
         if (file.path && file.path.startsWith('ui/')) {
-          console.log(
-            `  Changing path: ${file.path} -> ra3-ui/${file.path.substring(3)}`
-          )
-          file.path = `ra3-ui/${file.path.substring(3)}`
+          const newPath = `ra3-ui/${file.path.substring(3)}`
+          const targetPath = `components/ra3-ui/${file.path.substring(3)}`
+
+          console.log(`  Changing path: ${file.path} -> ${newPath}`)
+          console.log(`  Adding target: ${targetPath}`)
+
+          file.path = newPath
+          file.target = targetPath
           hasChanges = true
         }
       })
     }
 
-    // Fix registry dependencies with undefined URLs
+    // Fix registry dependencies with undefined URLs (if any still exist)
     if (
       jsonData.registryDependencies &&
       Array.isArray(jsonData.registryDependencies)

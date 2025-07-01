@@ -10,7 +10,8 @@
     {
       "path": "ra3-ui/theme-toggle.tsx",
       "content": "'use client'\n\nimport { MoonIcon } from 'lucide-react'\n\nimport { useState } from 'react'\n\nimport { cn } from '@/lib/utils'\nimport { SunIcon } from 'lucide-react'\nimport { useTheme } from 'next-themes'\nimport { useEffect } from 'react'\n\n// Simple toggle button for theme switching\nexport function ThemeToggle({\n  className,\n  children,\n}: {\n  className?: string\n  children?: (props: {\n    theme: string | undefined\n    mounted: boolean\n  }) => React.ReactNode\n}) {\n  const { theme, setTheme } = useTheme()\n  const [mounted, setMounted] = useState(false)\n\n  useEffect(() => {\n    setMounted(true)\n  }, [])\n\n  const toggleTheme = () => {\n    setTheme(theme === 'dark' ? 'light' : 'dark')\n  }\n\n  return (\n    <button\n      onClick={toggleTheme}\n      className={cn(\n        'text-foreground/80 hover:bg-muted rounded-full p-2 transition-colors',\n        className\n      )}\n    >\n      {children ? (\n        children({ theme, mounted })\n      ) : mounted && theme === 'dark' ? (\n        <SunIcon />\n      ) : (\n        <MoonIcon />\n      )}\n    </button>\n  )\n}\n",
-      "type": "registry:ui"
+      "type": "registry:ui",
+      "target": "components/ra3-ui/theme-toggle.tsx"
     }
   ]
 }

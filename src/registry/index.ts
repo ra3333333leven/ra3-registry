@@ -15,7 +15,7 @@ export const registry: Registry = [
       'A responsive navigation bar with smooth animations and theme toggle support',
     files: [{ path: 'ra3-ui/navbar.tsx', type: 'registry:ui' }],
     dependencies: ['framer-motion'],
-    registryDependencies: ['use-mobile', toInternalRegistryUrl('theme-set')],
+    registryDependencies: ['use-mobile', toInternalRegistryUrl('theme-toggle')],
   },
   {
     name: 'theme-provider',
