@@ -97,9 +97,11 @@ export function AppSidebarTrigger({
   className,
   onClick,
   disappearWhenOpen = false,
+  highlightWhenOpen = false,
   ...props
 }: React.ComponentProps<'button'> & {
   disappearWhenOpen?: boolean
+  highlightWhenOpen?: boolean
 }) {
   const { toggleSidebar, open } = useSidebar()
 
@@ -121,11 +123,11 @@ export function AppSidebarTrigger({
         className={cn(
           'relative cursor-pointer text-base font-semibold p-2 rounded-full transition-colors',
           'text-foreground hover:text-primary hover:bg-muted/60',
-          open && 'bg-muted text-primary'
+          highlightWhenOpen && open && 'bg-muted text-primary'
         )}
         {...props}
       >
-        {open ? <PanelLeftIcon size={20} /> : <PanelRightIcon size={20} />}
+        {open ? <PanelLeftIcon size={22} /> : <PanelRightIcon size={22} />}
         <span className="sr-only">Toggle Sidebar</span>
       </button>
     </div>
@@ -139,7 +141,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <SidebarGroup>
           <SidebarGroupContent>
             <div className="flex justify-end mb-4 pt-4 pr-6">
-              <AppSidebarTrigger />
+              <AppSidebarTrigger className="border-none bg-transparent shadow-none" />
             </div>
             <SidebarMenu>
               {data.navMain.map((item) => (

@@ -44,7 +44,7 @@ function NavBar({
     <div
       className={cn(
         'fixed left-1/2 -translate-x-1/2 z-50',
-        isMobile ? 'bottom-0 mb-6' : 'top-0 pt-6',
+        isMobile ? 'bottom-0 mb-6' : 'top-6',
         className
       )}
     >

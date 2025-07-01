@@ -51,6 +51,7 @@ export default function RootLayout({
                 <AppSidebarTrigger
                   className="fixed right-6 top-6 z-50"
                   disappearWhenOpen
+                  highlightWhenOpen
                 />
                 {children}
               </SidebarInset>
