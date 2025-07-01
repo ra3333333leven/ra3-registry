@@ -1,0 +1,15 @@
+{
+  "name": "theme-provider",
+  "type": "registry:ui",
+  "description": "A theme provider component wrapping next-themes ThemeProvider",
+  "dependencies": [
+    "next-themes"
+  ],
+  "files": [
+    {
+      "path": "ra3-ui/theme-provider.tsx",
+      "content": "'use client'\n\nimport * as React from 'react'\nimport { ThemeProvider as NextThemesProvider } from 'next-themes'\n\nexport function ThemeProvider({\n  children,\n  ...props\n}: React.ComponentProps<typeof NextThemesProvider>) {\n  return <NextThemesProvider {...props}>{children}</NextThemesProvider>\n}\n",
+      "type": "registry:ui"
+    }
+  ]
+}

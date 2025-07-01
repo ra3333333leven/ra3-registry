@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "pnpm register && next build",
-    "register": "simple-shadcn-cli build",
+    "register": "simple-shadcn-cli build && node scripts/convert-registry-paths.js",
+    "convert-paths": "node scripts/convert-registry-paths.js",
     "format": "prettier --write .",
     "start": "next start",
     "lint": "next lint"

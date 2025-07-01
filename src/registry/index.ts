@@ -47,14 +47,12 @@ export const registry: Registry = [
     type: 'registry:ui',
     description:
       'A collection of theme-related components including ThemeProvider, ThemeDropdown, and ThemeToggle',
-    files: [{ path: 'ra3-ui/theme-set.tsx', type: 'registry:ui' }],
-    dependencies: ['next-themes', 'lucide-react'],
-    registryDependencies: [
-      'dropdown-menu',
-      'button',
-      toInternalRegistryUrl('theme-provider'),
-      toInternalRegistryUrl('theme-dropdown'),
-      toInternalRegistryUrl('theme-toggle'),
+    files: [
+      { path: 'ra3-ui/theme-provider.tsx', type: 'registry:ui' },
+      { path: 'ra3-ui/theme-dropdown.tsx', type: 'registry:ui' },
+      { path: 'ra3-ui/theme-toggle.tsx', type: 'registry:ui' },
     ],
+    dependencies: ['next-themes', 'lucide-react'],
+    registryDependencies: ['dropdown-menu', 'button'],
   },
 ]
