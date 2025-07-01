@@ -62,6 +62,12 @@ const data: { navMain: NavMain[] } = {
           title: 'Placeholder',
           url: '/placeholder',
         },
+      ],
+    },
+    {
+      title: 'Theme Components',
+      url: '/',
+      items: [
         {
           title: 'Theme Provider',
           url: '/theme-provider',

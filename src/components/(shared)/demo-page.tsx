@@ -9,6 +9,7 @@ interface DemoPageProps {
   previewContent: React.ReactNode
   codeExample: string
   installScriptComponentName: string
+  children?: React.ReactNode
 }
 
 export function DemoPage({
@@ -17,6 +18,7 @@ export function DemoPage({
   previewContent,
   codeExample,
   installScriptComponentName,
+  children,
 }: DemoPageProps) {
   return (
     <PageContainer>
@@ -24,6 +26,7 @@ export function DemoPage({
         <TitleDesc title={componentName} description={componentDescription} />
         <ComponentPreview preview={previewContent} code={codeExample} />
         <InstallScript componentName={installScriptComponentName} />
+        {children}
       </FlexColSpacing>
     </PageContainer>
   )
