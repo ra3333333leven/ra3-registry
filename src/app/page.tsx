@@ -1,5 +1,6 @@
 import { TitleDesc } from '@/components/(shared)/title-desc'
 import { PageContainer, FlexColSpacing } from '@/registry/ra3-ui/container'
+import { getComponentGroups } from '@/lib/utils'
 import { registry } from '@/registry'
 import Link from 'next/link'
 import {
@@ -12,41 +13,23 @@ import { Card } from '@/registry/ra3-ui/card'
 import { ArrowRight } from 'lucide-react'
 
 export default function HomePage() {
-  // Group components according to sidebar structure
-  const componentGroups = {
-    components: registry.filter((component) =>
-      [
-        'button',
-        'container',
-        'copy-clip',
-        'loading',
-        'navbar',
-        'placeholder',
-      ].includes(component.name || '')
-    ),
-    themeComponents: registry.filter((component) =>
-      [
-        'theme-provider',
-        'theme-dropdown',
-        'theme-toggle',
-        'theme-set',
-      ].includes(component.name || '')
-    ),
-    hooks: registry.filter((component) => component.type === 'registry:hook'),
-  }
+  // Get component groups from registry
+  const componentGroups = getComponentGroups(registry)
 
-  const renderComponentGrid = (components: typeof registry) => (
+  const renderComponentGrid = (
+    components: typeof componentGroups.components
+  ) => (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {components.map((component) => (
         <Link
           key={component.name || 'unnamed'}
           href={`/${component.name || ''}`}
-          className="group transition-transform hover:scale-105"
         >
           <Card
             withGradient
             withShadow
-            className="h-full hover:shadow-lg transition-shadow"
+            withHoverAnimation
+            className="group h-full"
           >
             <CardHeader>
               <CardTitle className="text-xl capitalize">
@@ -70,7 +53,7 @@ export default function HomePage() {
       <FlexColSpacing>
         <TitleDesc
           title="ra3 Component Registry"
-          description="A collection of reusable UI components and hooks"
+          description="A collection of production ready UI components and hooks"
         />
 
         {/* Components Section */}

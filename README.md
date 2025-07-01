@@ -9,10 +9,10 @@ View the component registry and demos at [ra3-registry.vercel.app](https://ra3-r
 Install components from this registry using the shadcn CLI:
 
 ```bash
-npx shadcn@latest add https://ra3-registry.vercel.app/registry/my-button.json
+npx shadcn@latest add https://ra3-registry.vercel.app/registry/button.json
 ```
 
-# Adding Components
+## Adding Components
 
 1. Create component in `src/registry/ra3-ui/`, `src/registry/lib/`, `src/registry/hooks/`, etc.
 2. Register component in `src/registry/index.ts`:
@@ -22,7 +22,7 @@ export const registry: Registry = [
   {
     name: "my-button",
     type: "registry:ui", 
-    description: "Custom button",
+    description: "Custom button component",
     files: [{ path: "ra3-ui/my-button.tsx", type: "registry:ui" }],
     dependencies: ["framer-motion"], // npm dependencies
     registryDependencies: ["button"] // shadcn components
@@ -30,8 +30,14 @@ export const registry: Registry = [
 ]
 ```
 
-3. Run `pnpm register` to build the registry (automatically converts paths from `ui/` to `ra3-ui/`)
-4. Commit and Push to main: `git acp "add: my-button"`
+3. Create a demo page in `src/app/my-button/page.tsx` (optional but recommended)
+4. Run `pnpm register` to build the registry
+5. Commit and Push to main: `git acp "add: my-button"`
+
+The component will automatically appear in the correct section:
+- **Components**: UI components without "theme" in the name
+- **Theme Components**: UI components with "theme" in the name  
+- **Hooks**: Components with `type: "registry:hook"`
 
 ## Path Conversion & Target Installation
 
@@ -41,6 +47,14 @@ The build process automatically:
 
 This ensures components are installed in the correct location when users run the shadcn CLI.
 
+## Component Organization
+
+The registry automatically organizes components based on their type and name:
+
+- Components are grouped and displayed on the homepage
+- Navigation sidebar is generated from the registry
+- No manual maintenance of component lists required
+
 ## Meta Components
 
 You can create meta-components that bundle multiple related components:
@@ -49,7 +63,7 @@ You can create meta-components that bundle multiple related components:
 {
   name: "theme-set",
   type: "registry:ui",
-  description: "Complete theme system with provider, dropdown, and toggle",
+  description: "Complete theme component collection",
   files: [
     { path: "ra3-ui/theme-provider.tsx", type: "registry:ui" },
     { path: "ra3-ui/theme-dropdown.tsx", type: "registry:ui" },

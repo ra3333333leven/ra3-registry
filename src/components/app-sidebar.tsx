@@ -18,6 +18,8 @@ import {
   useSidebar,
 } from '@/components/ui/sidebar'
 import { cn } from '@/lib/utils'
+import { generateNavigation } from '@/lib/utils'
+import { registry } from '@/registry'
 
 // This is sample data.
 type NavItem = {
@@ -32,72 +34,8 @@ type NavMain = {
   items?: NavItem[]
 }
 
-const data: { navMain: NavMain[] } = {
-  navMain: [
-    {
-      title: 'Components',
-      url: '/',
-      items: [
-        {
-          title: 'Button',
-          url: '/button',
-        },
-        {
-          title: 'Container',
-          url: '/container',
-        },
-        {
-          title: 'Copy Clip',
-          url: '/copy-clip',
-        },
-        {
-          title: 'Loading',
-          url: '/loading',
-        },
-        {
-          title: 'Navbar',
-          url: '/navbar',
-        },
-        {
-          title: 'Placeholder',
-          url: '/placeholder',
-        },
-      ],
-    },
-    {
-      title: 'Theme Components',
-      url: '/',
-      items: [
-        {
-          title: 'Theme Provider',
-          url: '/theme-provider',
-        },
-        {
-          title: 'Theme Dropdown',
-          url: '/theme-dropdown',
-        },
-        {
-          title: 'Theme Toggle',
-          url: '/theme-toggle',
-        },
-        {
-          title: 'Theme Set',
-          url: '/theme-set',
-        },
-      ],
-    },
-    {
-      title: 'Hooks',
-      url: '/',
-      items: [
-        {
-          title: 'Use Copy to Clipboard',
-          url: '/use-copy-to-clipboard',
-        },
-      ],
-    },
-  ],
-}
+// Generate navigation data from registry
+const data: { navMain: NavMain[] } = generateNavigation(registry)
 
 export function AppSidebarTrigger({
   className,

@@ -19,6 +19,10 @@ interface CardProps extends React.ComponentProps<typeof ShadcnCard> {
    */
   withShadow?: boolean
   /**
+   * Whether to add hover animations (scale and enhanced shadow)
+   */
+  withHoverAnimation?: boolean
+  /**
    * Border beam configuration options
    */
   laserProps?: {
@@ -36,6 +40,7 @@ function Card({
   withLaser = false,
   withGradient = false,
   withShadow = false,
+  withHoverAnimation = false,
   laserProps,
   className,
   children,
@@ -48,6 +53,8 @@ function Card({
         withGradient &&
           'bg-gradient-to-br from-primary/10 via-primary/5 to-background',
         withShadow && 'shadow-md',
+        withHoverAnimation &&
+          'transition-all duration-200 hover:scale-105 hover:shadow-lg',
         className
       )}
       {...props}

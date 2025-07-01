@@ -12,22 +12,30 @@ export const registry: Registry = [
     name: 'button',
     type: 'registry:ui',
     description:
-      'An extended button component based on shadcn/ui button with additional customization',
+      'Button with loading states, animated arrow, and rounded styling',
     files: [{ path: 'ra3-ui/button.tsx', type: 'registry:ui' }],
-    registryDependencies: ['button'],
+    dependencies: ['lucide-react'],
+    registryDependencies: ['button', toInternalRegistryUrl('loading')],
+  },
+  {
+    name: 'card',
+    type: 'registry:ui',
+    description:
+      'Enhanced card component with optional laser border, gradient background, and shadow effects',
+    files: [{ path: 'ra3-ui/card.tsx', type: 'registry:ui' }],
+    registryDependencies: ['card'],
   },
   {
     name: 'container',
     type: 'registry:ui',
-    description:
-      'A collection of responsive container components for consistent page layouts and spacing',
+    description: 'Layout components to reuse across your app',
     files: [{ path: 'ra3-ui/container.tsx', type: 'registry:ui' }],
   },
   {
     name: 'copy-clip',
     type: 'registry:ui',
     description:
-      'A reusable component that provides copy-to-clipboard functionality with visual feedback',
+      'Simple copy-to-clipboard component with visual feedback and optional toasts',
     files: [{ path: 'ra3-ui/copy-clip.tsx', type: 'registry:ui' }],
     dependencies: ['lucide-react'],
     registryDependencies: [
@@ -38,8 +46,7 @@ export const registry: Registry = [
   {
     name: 'loading',
     type: 'registry:ui',
-    description:
-      'Loading spinner components with various sizes and a full-page loading component',
+    description: 'Minimal loading spinner components',
     files: [{ path: 'ra3-ui/loading.tsx', type: 'registry:ui' }],
     dependencies: ['lucide-react'],
   },
@@ -47,7 +54,7 @@ export const registry: Registry = [
     name: 'navbar',
     type: 'registry:ui',
     description:
-      'A responsive navigation bar with smooth animations and theme toggle support',
+      'Responsive navigation bar with smooth animations and optional theme toggle',
     files: [{ path: 'ra3-ui/navbar.tsx', type: 'registry:ui' }],
     dependencies: ['framer-motion'],
     registryDependencies: ['use-mobile', toInternalRegistryUrl('theme-toggle')],
@@ -56,23 +63,21 @@ export const registry: Registry = [
     name: 'placeholder',
     type: 'registry:ui',
     description:
-      'A placeholder page component with sample content for demonstrating layouts',
+      'Placeholder components for layout demonstrations or WIP pages',
     files: [{ path: 'ra3-ui/placeholder.tsx', type: 'registry:ui' }],
     registryDependencies: [toInternalRegistryUrl('container')],
   },
   {
     name: 'theme-provider',
     type: 'registry:ui',
-    description:
-      'A theme provider component wrapping next-themes ThemeProvider',
+    description: 'Theme provider that wraps your app',
     files: [{ path: 'ra3-ui/theme-provider.tsx', type: 'registry:ui' }],
     dependencies: ['next-themes'],
   },
   {
     name: 'theme-dropdown',
     type: 'registry:ui',
-    description:
-      'A dropdown menu for theme selection with light, dark, and system options',
+    description: 'Theme dropdown menu selection for light/dark/system',
     files: [{ path: 'ra3-ui/theme-dropdown.tsx', type: 'registry:ui' }],
     dependencies: ['next-themes', 'lucide-react'],
     registryDependencies: ['dropdown-menu', 'button'],
@@ -80,8 +85,7 @@ export const registry: Registry = [
   {
     name: 'theme-toggle',
     type: 'registry:ui',
-    description:
-      'A simple toggle button for switching between light and dark themes',
+    description: 'Simple light/dark theme toggle button',
     files: [{ path: 'ra3-ui/theme-toggle.tsx', type: 'registry:ui' }],
     dependencies: ['next-themes', 'lucide-react'],
   },
@@ -89,7 +93,7 @@ export const registry: Registry = [
     name: 'theme-set',
     type: 'registry:ui',
     description:
-      'A collection of theme-related components including ThemeProvider, ThemeDropdown, and ThemeToggle',
+      'Packages: theme-provider, theme-dropdown, theme-toggle into one install',
     files: [
       { path: 'ra3-ui/theme-provider.tsx', type: 'registry:ui' },
       { path: 'ra3-ui/theme-dropdown.tsx', type: 'registry:ui' },
@@ -101,8 +105,7 @@ export const registry: Registry = [
   {
     name: 'use-copy-to-clipboard',
     type: 'registry:hook',
-    description:
-      'A custom hook for copying text to clipboard with toast notifications',
+    description: 'Custom hook for copying text with optional toasts',
     files: [{ path: 'hooks/use-copy-to-clipboard.ts', type: 'registry:hook' }],
     dependencies: ['sonner'],
   },
