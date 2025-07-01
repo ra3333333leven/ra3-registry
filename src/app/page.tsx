@@ -16,7 +16,7 @@ export default function HomePage() {
       <FlexColSpacing>
         <TitleDesc
           title="ra3 Component Registry"
-          description="A collection of reusable UI components and hooks built with React, TypeScript, and Tailwind CSS. Click on any component to view its documentation and examples."
+          description="A collection of reusable UI components and hooks"
         />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

@@ -79,7 +79,7 @@ export function ScriptCopyBtn({
                     <Button
                       variant="ghost"
                       size="lg"
-                      className={`text-base relative rounded-none bg-background px-2 py-1 hover:bg-background ${
+                      className={`cursor-pointer text-base relative rounded-none bg-background px-2 py-1 hover:bg-background ${
                         packageManager === pm
                           ? 'text-primary'
                           : 'text-muted-foreground'

@@ -45,7 +45,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <NavBar navigationItems={navigationItems} withThemeToggle />
-          <main className="h-dvh w-dvw">{children}</main>
+          <main className="h-dvh w-dvw overflow-x-hidden">{children}</main>
           <Toaster />
         </ThemeProvider>
       </body>

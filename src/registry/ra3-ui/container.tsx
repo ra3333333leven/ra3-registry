@@ -51,9 +51,7 @@ function FullPage({
   debug = DEFAULT_DEBUG,
 }: ContainerProps) {
   return (
-    <div className={cn('overflow-x-hidden', debug && DEBUG_BORDER, className)}>
-      {children}
-    </div>
+    <div className={cn('', debug && DEBUG_BORDER, className)}>{children}</div>
   )
 }
 
@@ -70,7 +68,7 @@ function YPadding({
   return (
     <div
       className={cn(
-        'overflow-y-auto',
+        'overflow-y-auto overflow-x-hidden',
         Y_PADDING,
         debug && DEBUG_BORDER,
         className
