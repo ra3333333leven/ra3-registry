@@ -12,10 +12,7 @@ export function InstallScript({
   componentName,
   className,
 }: InstallScriptProps) {
-  const baseUrl = process.env.NEXT_PUBLIC_VERCEL_URL
-    ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
-    : 'http://localhost:3000'
-  const registryUrl = `${baseUrl}/registry/${componentName}.json`
+  const registryUrl = `${process.env.NEXT_PUBLIC_URL}/registry/${componentName}.json`
 
   const commandMap = {
     npm: `npx shadcn@latest add ${registryUrl}`,

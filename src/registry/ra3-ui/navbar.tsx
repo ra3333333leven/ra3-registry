@@ -6,7 +6,7 @@ import type { Url } from 'next/dist/shared/lib/router/router'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState, useEffect } from 'react'
-import { useIsMobile } from '@/registry/hooks/use-is-mobile'
+import { useIsMobile } from '@/hooks/use-mobile'
 import { ThemeToggle } from '@/components/(shared)/theme-toggle'
 
 export interface NavigationItem {

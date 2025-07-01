@@ -2,7 +2,7 @@
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { cn } from '@/lib/utils'
-import { CopyClip } from '@/registry/ui/copy-clip'
+import { CopyClip } from '@/registry/ra3-ui/copy-clip'
 import { useTheme } from 'next-themes'
 import { Highlight, themes } from 'prism-react-renderer'
 import * as React from 'react'

@@ -1,5 +1,5 @@
 import { DemoPage } from '@/components/(shared)/demo-page'
-import { NavBar } from '@/registry/ui/navbar'
+import { NavBar } from '@/registry/ra3-ui/navbar'
 import { Bell, Home, Settings, User } from 'lucide-react'
 
 const demoNavigationItems = [

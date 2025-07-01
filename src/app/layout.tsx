@@ -1,5 +1,5 @@
 import { ThemeProvider } from '@/components/(shared)/theme-provider'
-import { NavBar } from '@/registry/ui/navbar'
+import { NavBar } from '@/registry/ra3-ui/navbar'
 import { CirclePower, Home, Loader, Navigation } from 'lucide-react'
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'

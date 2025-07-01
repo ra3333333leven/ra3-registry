@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build",
+    "build": "pnpm register && next build",
     "register": "simple-shadcn-cli build",
     "format": "prettier --write .",
     "start": "next start",

@@ -1,6 +1,6 @@
 import { ComponentPreview } from '@/components/(shared)/component-preview'
 import { InstallScript } from '@/components/(shared)/install-script'
-import { PageContainer } from '@/registry/ui/container'
+import { PageContainer } from '@/registry/ra3-ui/container'
 
 interface DemoPageProps {
   componentName: string
