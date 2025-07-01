@@ -1,17 +1,21 @@
 import fs from 'fs'
 import path from 'path'
 
-const registryDir = './public/registry'
+// Configuration constants
+const REGISTRY_DIR = './public/registry'
+const SOURCE_PATH_PREFIX = 'ui/'
+const TARGET_PATH_PREFIX = 'ra3-ui/'
+const TARGET_INSTALL_DIR = 'components/ra3-ui/'
 
 // Ensure the registry directory exists
-if (!fs.existsSync(registryDir)) {
-  console.error(`❌ Registry directory not found: ${registryDir}`)
+if (!fs.existsSync(REGISTRY_DIR)) {
+  console.error(`❌ Registry directory not found: ${REGISTRY_DIR}`)
   process.exit(1)
 }
 
 // Get all JSON files in the registry directory
 const jsonFiles = fs
-  .readdirSync(registryDir)
+  .readdirSync(REGISTRY_DIR)
   .filter((file) => file.endsWith('.json'))
 
 if (jsonFiles.length === 0) {
@@ -23,7 +27,7 @@ console.log(`🔍 Found ${jsonFiles.length} JSON files to process:`)
 jsonFiles.forEach((file) => console.log(`  - ${file}`))
 
 jsonFiles.forEach((filename) => {
-  const filePath = path.join(registryDir, filename)
+  const filePath = path.join(REGISTRY_DIR, filename)
 
   try {
     // Read the JSON file
@@ -35,13 +39,14 @@ jsonFiles.forEach((filename) => {
     // Track if any changes were made
     let hasChanges = false
 
-    // Fix file paths and add target properties
+    // Convert paths and add target properties
     if (jsonData.files && Array.isArray(jsonData.files)) {
       jsonData.files.forEach((file) => {
-        // Convert ui/ paths to ra3-ui/ and add target
-        if (file.path && file.path.startsWith('ui/')) {
-          const newPath = `ra3-ui/${file.path.substring(3)}`
-          const targetPath = `components/ra3-ui/${file.path.substring(3)}`
+        // Convert source paths to target paths and add install target
+        if (file.path && file.path.startsWith(SOURCE_PATH_PREFIX)) {
+          const fileName = file.path.substring(SOURCE_PATH_PREFIX.length)
+          const newPath = `${TARGET_PATH_PREFIX}${fileName}`
+          const targetPath = `${TARGET_INSTALL_DIR}${fileName}`
 
           console.log(`  Changing path: ${file.path} -> ${newPath}`)
           console.log(`  Adding target: ${targetPath}`)
@@ -86,4 +91,4 @@ jsonFiles.forEach((filename) => {
   }
 })
 
-console.log('\n🎉 Registry path fixing complete!')
+console.log('\n🎉 Target paths added successfully!')
