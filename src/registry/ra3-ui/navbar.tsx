@@ -48,7 +48,7 @@ function NavBar({
         className
       )}
     >
-      <div className="flex items-center gap-3 bg-background/10 border border-border backdrop-blur-sm py-1 px-1 rounded-full shadow-lg">
+      <div className="flex items-center gap-3 bg-background/10 border border-border backdrop-blur-sm p-1 rounded-full shadow-lg">
         {navigationItems.map((item) => {
           const isActive = activeTab === item.name
 

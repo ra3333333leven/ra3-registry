@@ -1,6 +1,8 @@
-import { ThemeProvider } from '@/registry/ra3-ui/theme-provider'
+import { AppSidebar, AppSidebarTrigger } from '@/components/app-sidebar'
+import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar'
 import { NavBar } from '@/registry/ra3-ui/navbar'
-import { CirclePower, Home, Loader, Navigation } from 'lucide-react'
+import { ThemeProvider } from '@/registry/ra3-ui/theme-provider'
+import { Home, Navigation } from 'lucide-react'
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import { Toaster } from 'sonner'
@@ -23,9 +25,7 @@ export const metadata: Metadata = {
 
 const navigationItems = [
   { name: 'Home', href: '/', icon: <Home /> },
-  { name: 'Button', href: '/button', icon: <CirclePower /> },
-  { name: 'Loading', href: '/loading', icon: <Loader /> },
-  { name: 'NavBar', href: '/navbar', icon: <Navigation /> },
+  { name: 'Navbar', href: '/navbar', icon: <Navigation /> },
 ]
 
 export default function RootLayout({
@@ -44,8 +44,19 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <NavBar navigationItems={navigationItems} withThemeToggle />
-          <main className="h-dvh w-dvw overflow-x-hidden">{children}</main>
+          <SidebarProvider>
+            <NavBar navigationItems={navigationItems} withThemeToggle />
+            <main className="h-dvh w-dvw overflow-x-hidden">
+              <SidebarInset>
+                <AppSidebarTrigger
+                  className="fixed right-6 top-6 z-50"
+                  disappearWhenOpen
+                />
+                {children}
+              </SidebarInset>
+            </main>
+            <AppSidebar side="right" />
+          </SidebarProvider>
           <Toaster />
         </ThemeProvider>
       </body>
