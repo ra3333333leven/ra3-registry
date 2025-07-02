@@ -2,17 +2,18 @@
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { cn } from '@/lib/utils'
-import { CopyClip } from '@/registry/ra3-ui/copy-clip'
-import { useTheme } from 'next-themes'
-import { Highlight, themes } from 'prism-react-renderer'
 import { motion } from 'motion/react'
 import * as React from 'react'
+import { HeaderDesc } from './typography'
+import { Code } from './code'
 
 interface ComponentPreviewProps extends React.HTMLAttributes<HTMLDivElement> {
   preview: React.ReactNode
   code: string // Raw code string to display
   language?: string // Programming language for syntax highlighting
   align?: 'center' | 'start' | 'end'
+  title?: string // Optional title for the component preview
+  description?: string // Optional description for the component preview
 }
 
 export function ComponentPreview({
@@ -21,9 +22,10 @@ export function ComponentPreview({
   language = 'tsx',
   className,
   align = 'center',
+  title,
+  description,
   ...props
 }: ComponentPreviewProps) {
-  const { resolvedTheme } = useTheme()
   const [activeTab, setActiveTab] = React.useState('preview')
 
   const tabs = [
@@ -36,6 +38,9 @@ export function ComponentPreview({
       className={cn('relative my-4 flex flex-col space-y-2', className)}
       {...props}
     >
+      {(title || description) && (
+        <HeaderDesc title={title} description={description} />
+      )}
       <Tabs
         defaultValue="preview"
         className="relative mr-auto w-full"
@@ -93,42 +98,7 @@ export function ComponentPreview({
             transition={{ duration: 0.2 }}
             className="flex flex-col space-y-4"
           >
-            <div className="w-full rounded-md overflow-hidden relative">
-              <div className="absolute top-4 right-4 z-10">
-                <CopyClip variant="outline" textToCopy={code.trim()} />
-              </div>
-              <Highlight
-                theme={
-                  resolvedTheme === 'dark' ? themes.oneDark : themes.github
-                }
-                code={code.trim()}
-                language={language}
-              >
-                {({
-                  className: prismClassName,
-                  style,
-                  tokens,
-                  getLineProps,
-                  getTokenProps,
-                }) => (
-                  <pre
-                    className={cn(
-                      'w-full max-h-[650px] overflow-x-auto rounded-lg border py-4 px-4',
-                      prismClassName
-                    )}
-                    style={style}
-                  >
-                    {tokens.map((line, i) => (
-                      <div key={i} {...getLineProps({ line })}>
-                        {line.map((token, key) => (
-                          <span key={key} {...getTokenProps({ token })} />
-                        ))}
-                      </div>
-                    ))}
-                  </pre>
-                )}
-              </Highlight>
-            </div>
+            <Code code={code} language={language} />
           </motion.div>
         </TabsContent>
       </Tabs>

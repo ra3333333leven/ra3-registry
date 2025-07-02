@@ -1,4 +1,4 @@
-import { TitleDesc } from '@/components/(shared)/title-desc'
+import { TitleDesc } from '@/components/(shared)/typography'
 import { PageContainer } from './container'
 
 // Replace this with something more dynamic, use lorem ipsum generators etc...

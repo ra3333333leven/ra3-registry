@@ -1,6 +1,6 @@
 import { ComponentPreview } from '@/components/(shared)/component-preview'
 import { InstallScript } from '@/components/(shared)/install-script'
-import { TitleDesc } from '@/components/(shared)/title-desc'
+import { TitleDesc } from '@/components/(shared)/typography'
 import { PageContainer, FlexColSpacing } from '@/registry/ra3-ui/container'
 
 interface DemoPageProps {

@@ -1,4 +1,4 @@
-import { TitleDesc } from '@/components/(shared)/title-desc'
+import { TitleDesc } from '@/components/(shared)/typography'
 import {
   CardContent,
   CardDescription,
