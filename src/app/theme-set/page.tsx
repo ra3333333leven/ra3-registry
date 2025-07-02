@@ -3,6 +3,7 @@
 import { DemoPage } from '@/components/(shared)/demo-page'
 import { ThemeToggle } from '@/registry/ra3-ui/theme-toggle'
 import { ThemeDropdown } from '@/registry/ra3-ui/theme-dropdown'
+import { getNameFromRegistry, getDescriptionFromRegistry } from '@/lib/utils'
 
 // Separate client component for the preview content
 function ThemeSetPreview() {
@@ -88,8 +89,8 @@ export default function Example() {
 export default function ThemeSetPage() {
   return (
     <DemoPage
-      componentName="Theme Set"
-      componentDescription="A complete collection of theme-related components including ThemeProvider, ThemeToggle, and ThemeDropdown for comprehensive theme management in your application."
+      componentName={getNameFromRegistry('theme-set')}
+      componentDescription={getDescriptionFromRegistry('theme-set')}
       previewContent={<ThemeSetPreview />}
       codeExample={codeExample}
       installScriptComponentName="theme-set"

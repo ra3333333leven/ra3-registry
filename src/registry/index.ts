@@ -1,5 +1,6 @@
 import type { Registry } from 'simple-shadcn-cli/types'
-import { toInternalRegistryUrl } from '@/lib/utils'
+import { toInternalRegistryUrl } from './registry-utils'
+
 /**
  * Registry Configuration
  *

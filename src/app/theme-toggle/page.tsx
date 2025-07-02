@@ -2,6 +2,7 @@
 
 import { DemoPage } from '@/components/(shared)/demo-page'
 import { ThemeToggle } from '@/registry/ra3-ui/theme-toggle'
+import { getNameFromRegistry, getDescriptionFromRegistry } from '@/lib/utils'
 
 // Separate client component for the preview content
 function ThemeTogglePreview() {
@@ -63,8 +64,8 @@ export default function Example() {
 export default function ThemeTogglePage() {
   return (
     <DemoPage
-      componentName="Theme Toggle"
-      componentDescription="A simple toggle button for switching between light and dark themes with smooth transitions."
+      componentName={getNameFromRegistry('theme-toggle')}
+      componentDescription={getDescriptionFromRegistry('theme-toggle')}
       previewContent={<ThemeTogglePreview />}
       codeExample={codeExample}
       installScriptComponentName="theme-toggle"

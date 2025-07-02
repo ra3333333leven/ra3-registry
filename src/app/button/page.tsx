@@ -2,6 +2,7 @@
 
 import { DemoPage } from '@/components/(shared)/demo-page'
 import { Button } from '@/registry/ra3-ui/button'
+import { getNameFromRegistry, getDescriptionFromRegistry } from '@/lib/utils'
 import { useState } from 'react'
 
 const codeExample = `'use client'
@@ -128,8 +129,8 @@ function ButtonPreview() {
 export default function ButtonPage() {
   return (
     <DemoPage
-      componentName="Button"
-      componentDescription="A customizable button component built on top of shadcn/ui with all the standard variants and sizes."
+      componentName={getNameFromRegistry('button')}
+      componentDescription={getDescriptionFromRegistry('button')}
       previewContent={<ButtonPreview />}
       codeExample={codeExample}
       installScriptComponentName="button"

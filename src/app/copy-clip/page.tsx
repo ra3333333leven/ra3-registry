@@ -1,5 +1,6 @@
 import { DemoPage } from '@/components/(shared)/demo-page'
 import { CopyClip } from '@/registry/ra3-ui/copy-clip'
+import { getNameFromRegistry, getDescriptionFromRegistry } from '@/lib/utils'
 
 const codeExample = `import { CopyClip } from '@/components/ui/copy-clip'
 
@@ -29,8 +30,8 @@ export default function Example() {
 export default function CopyClipPage() {
   return (
     <DemoPage
-      componentName="CopyClip"
-      componentDescription="A reusable component that provides copy-to-clipboard functionality with visual feedback and toast notifications."
+      componentName={getNameFromRegistry('copy-clip')}
+      componentDescription={getDescriptionFromRegistry('copy-clip')}
       previewContent={
         <div className="space-y-6">
           <div className="flex items-center gap-4">

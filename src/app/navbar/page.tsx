@@ -1,6 +1,7 @@
 import { DemoPage } from '@/components/(shared)/demo-page'
 import { NavBar } from '@/registry/ra3-ui/navbar'
 import { Bell, Home, Settings, User } from 'lucide-react'
+import { getNameFromRegistry, getDescriptionFromRegistry } from '@/lib/utils'
 
 const demoNavigationItems = [
   { name: 'Home', href: '#', icon: <Home /> },
@@ -31,8 +32,8 @@ export default function Example() {
 export default function NavBarPage() {
   return (
     <DemoPage
-      componentName="NavBar"
-      componentDescription="A responsive navigation bar with smooth animations and theme toggle support."
+      componentName={getNameFromRegistry('navbar')}
+      componentDescription={getDescriptionFromRegistry('navbar')}
       previewContent={
         <NavBar
           navigationItems={demoNavigationItems}

@@ -4,6 +4,12 @@ A component registry for ra3's components, built with [simple-shadcn-cli](https:
 
 View the component registry and demos at [ra3-registry.vercel.app](https://ra3-registry.vercel.app)
 
+## Ready Components
+- Components that are for now, fully built and whos demo pages have been reviewed
+[x] Button
+[x] Loading
+[x] Navbar
+
 ## Installing Components
 
 Install components from this registry using the shadcn CLI:

@@ -18,9 +18,7 @@ import {
   SidebarRail,
   useSidebar,
 } from '@/components/ui/sidebar'
-import { cn } from '@/lib/utils'
-import { generateNavigation } from '@/lib/utils'
-import { registry } from '@/registry'
+import { cn, generateNavigation } from '@/lib/utils'
 
 // Navigation types
 type NavItem = {
@@ -35,7 +33,7 @@ type NavMain = {
 }
 
 // Generate navigation data from registry
-const data: { navMain: NavMain[] } = generateNavigation(registry)
+const data: { navMain: NavMain[] } = generateNavigation()
 
 export function AppSidebarTrigger({
   className,

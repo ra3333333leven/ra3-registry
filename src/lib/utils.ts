@@ -1,21 +1,16 @@
+import { registry } from '@/registry'
 import { clsx, type ClassValue } from 'clsx'
 import { twMerge } from 'tailwind-merge'
-import type { Registry } from 'simple-shadcn-cli/types'
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
-
-// Utility function to generate internal dependency URLs
-export const toInternalRegistryUrl = (componentName: string) =>
-  `${process.env.NEXT_PUBLIC_URL}/registry/${componentName}.json`
-
 // Registry utility functions
 
 /**
  * Groups registry components into categories based on type and name
  */
-export function getComponentGroups(registry: Registry) {
+export function getComponentGroups() {
   const components = registry.filter(
     (component) =>
       component.type === 'registry:ui' && !component.name?.includes('theme')
@@ -48,10 +43,42 @@ export function formatComponentName(name: string): string {
 }
 
 /**
+ * Gets the formatted name for a component from the registry
+ * Throws an error if the component is not found
+ */
+export function getNameFromRegistry(componentName: string): string {
+  const component = registry.find((item) => item.name === componentName)
+  if (!component) {
+    throw new Error(`Component "${componentName}" not found in registry`)
+  }
+  if (!component.name) {
+    throw new Error(`Component "${componentName}" has no name in registry`)
+  }
+  return formatComponentName(component.name)
+}
+
+/**
+ * Gets the description for a component from the registry
+ * Throws an error if the component is not found
+ */
+export function getDescriptionFromRegistry(componentName: string): string {
+  const component = registry.find((item) => item.name === componentName)
+  if (!component) {
+    throw new Error(`Component "${componentName}" not found in registry`)
+  }
+  if (!component.description) {
+    throw new Error(
+      `Component "${componentName}" has no description in registry`
+    )
+  }
+  return component.description
+}
+
+/**
  * Generates navigation data for sidebar from registry
  */
-export function generateNavigation(registry: Registry) {
-  const groups = getComponentGroups(registry)
+export function generateNavigation() {
+  const groups = getComponentGroups()
 
   return {
     navMain: [

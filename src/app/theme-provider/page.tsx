@@ -1,4 +1,5 @@
 import { DemoPage } from '@/components/(shared)/demo-page'
+import { getNameFromRegistry, getDescriptionFromRegistry } from '@/lib/utils'
 
 const codeExample = `import { ThemeProvider } from '@/components/ui/theme-provider'
 
@@ -26,8 +27,8 @@ export default function RootLayout({
 export default function ThemeProviderPage() {
   return (
     <DemoPage
-      componentName="ThemeProvider"
-      componentDescription="A wrapper component that provides theme context to your application using next-themes."
+      componentName={getNameFromRegistry('theme-provider')}
+      componentDescription={getDescriptionFromRegistry('theme-provider')}
       previewContent={
         <div className="p-6 border rounded-lg bg-muted/50">
           <h3 className="text-lg font-semibold mb-2">Theme Provider</h3>

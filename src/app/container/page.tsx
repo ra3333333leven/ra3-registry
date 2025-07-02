@@ -1,5 +1,6 @@
 import { DemoPage } from '@/components/(shared)/demo-page'
 import { PageContainer, FlexColSpacing } from '@/registry/ra3-ui/container'
+import { getNameFromRegistry, getDescriptionFromRegistry } from '@/lib/utils'
 
 const codeExample = `import { 
   PageContainer, 
@@ -29,8 +30,8 @@ export default function Example() {
 export default function ContainerPage() {
   return (
     <DemoPage
-      componentName="Container"
-      componentDescription="A collection of responsive container components for consistent page layouts and spacing."
+      componentName={getNameFromRegistry('container')}
+      componentDescription={getDescriptionFromRegistry('container')}
       previewContent={
         <div className="w-full max-w-2xl border rounded-lg overflow-hidden">
           <PageContainer className="h-64">

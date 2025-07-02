@@ -1,6 +1,10 @@
 import { DemoPage } from '@/components/(shared)/demo-page'
 import { Spinner } from '@/registry/ra3-ui/loading'
-import { cn } from '@/lib/utils'
+import {
+  cn,
+  getNameFromRegistry,
+  getDescriptionFromRegistry,
+} from '@/lib/utils'
 import { type VariantProps, cva } from 'class-variance-authority'
 
 // BoundingBox variants for different sizes with equal aspect ratios
@@ -105,8 +109,8 @@ export default function Example() {
 export default function LoadingPageDemo() {
   return (
     <DemoPage
-      componentName="Loading"
-      componentDescription="Loading components including a configurable spinner with different sizes and states. The 'full' size variant expands to fill its parent container."
+      componentName={getNameFromRegistry('loading')}
+      componentDescription={getDescriptionFromRegistry('loading')}
       previewContent={
         <div className="space-y-8">
           <div>

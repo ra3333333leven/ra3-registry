@@ -1,20 +1,19 @@
 import { TitleDesc } from '@/components/(shared)/title-desc'
-import { PageContainer, FlexColSpacing } from '@/registry/ra3-ui/container'
-import { getComponentGroups } from '@/lib/utils'
-import { registry } from '@/registry'
-import Link from 'next/link'
 import {
+  CardContent,
+  CardDescription,
   CardHeader,
   CardTitle,
-  CardDescription,
-  CardContent,
 } from '@/components/ui/card'
+import { getComponentGroups } from '@/lib/utils'
 import { Card } from '@/registry/ra3-ui/card'
+import { FlexColSpacing, PageContainer } from '@/registry/ra3-ui/container'
 import { ArrowRight } from 'lucide-react'
+import Link from 'next/link'
 
 export default function HomePage() {
   // Get component groups from registry
-  const componentGroups = getComponentGroups(registry)
+  const componentGroups = getComponentGroups()
 
   const renderComponentGrid = (
     components: typeof componentGroups.components
