@@ -2,6 +2,7 @@
 
 import { PanelLeftIcon, PanelRightIcon } from 'lucide-react'
 import * as React from 'react'
+import { usePathname } from 'next/navigation'
 
 import {
   Sidebar,
@@ -21,11 +22,10 @@ import { cn } from '@/lib/utils'
 import { generateNavigation } from '@/lib/utils'
 import { registry } from '@/registry'
 
-// This is sample data.
+// Navigation types
 type NavItem = {
   title: string
   url: string
-  isActive?: boolean
 }
 
 type NavMain = {
@@ -79,6 +79,8 @@ export function AppSidebarTrigger({
 }
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const pathname = usePathname()
+
   return (
     <Sidebar {...props}>
       <SidebarContent>
@@ -100,15 +102,15 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                   </SidebarMenuButton>
                   {item.items?.length ? (
                     <SidebarMenuSub>
-                      {item.items.map((item) => (
-                        <SidebarMenuSubItem key={item.title}>
+                      {item.items.map((subItem) => (
+                        <SidebarMenuSubItem key={subItem.title}>
                           <SidebarMenuSubButton
                             asChild
-                            isActive={item.isActive}
+                            isActive={pathname === subItem.url}
                             size="md"
                             className="font-light text-foreground/80"
                           >
-                            <a href={item.url}>{item.title}</a>
+                            <a href={subItem.url}>{subItem.title}</a>
                           </SidebarMenuSubButton>
                         </SidebarMenuSubItem>
                       ))}
