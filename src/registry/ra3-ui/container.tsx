@@ -3,7 +3,7 @@ import { ReactNode } from 'react'
 
 // Configuration constants for consistent spacing and sizing across the project
 const WIDTH = 'px-4 md:max-w-5xl mx-auto' // Maximum width constraint for content - adjust per project needs
-const Y_PADDING = 'pt-4 pb-32 md:p-32' // Vertical padding for page sections - adjust per project needs
+const Y_PADDING = 'pt-4 pb-32 md:py-32' // Vertical padding for page sections - adjust per project needs
 const FLEX_COL_GAP = 'gap-8' // Gap spacing for flex column layouts - adjust per project needs
 
 // Debug Styles

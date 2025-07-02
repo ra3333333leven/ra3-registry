@@ -21,7 +21,7 @@ interface HeaderDescProps {
 
 export function HeaderDesc({ title, description }: HeaderDescProps) {
   return (
-    <div className="space-y-4">
+    <div className="space-y-2">
       {title && <h2 className="text-3xl font-semibold">{title}</h2>}
       {description && (
         <p className="text-xl text-muted-foreground">{description}</p>

@@ -14,6 +14,7 @@ interface ComponentPreviewProps extends React.HTMLAttributes<HTMLDivElement> {
   align?: 'center' | 'start' | 'end'
   title?: string // Optional title for the component preview
   description?: string // Optional description for the component preview
+  previewClassName?: string // Optional className for the preview container
 }
 
 export function ComponentPreview({
@@ -24,6 +25,7 @@ export function ComponentPreview({
   align = 'center',
   title,
   description,
+  previewClassName,
   ...props
 }: ComponentPreviewProps) {
   const [activeTab, setActiveTab] = React.useState('preview')
@@ -83,7 +85,8 @@ export function ComponentPreview({
               align === 'start' && 'justify-start',
               align === 'end' && 'justify-end',
               'rounded-md border',
-              'bg-gradient-to-br from-background via-muted/40 to-muted/60'
+              'bg-gradient-to-br from-background via-muted/40 to-muted/60',
+              previewClassName
             )}
           >
             {preview}

@@ -1,44 +1,7 @@
 import { DemoPage } from '@/components/(shared)/demo-page'
+import { BoundingBox } from '@/components/(shared)/bounding-box'
 import { Spinner } from '@/registry/ra3-ui/loading'
-import {
-  cn,
-  getNameFromRegistry,
-  getDescriptionFromRegistry,
-} from '@/lib/utils'
-import { type VariantProps, cva } from 'class-variance-authority'
-
-// BoundingBox variants for different sizes with equal aspect ratios
-const boundingBoxVariants = cva(
-  'border-2 border-dashed border-muted-foreground/30 rounded-lg',
-  {
-    variants: {
-      size: {
-        sm: 'h-12 w-12', // 48px x 48px
-        md: 'h-16 w-16', // 64px x 64px
-        lg: 'h-24 w-24', // 96px x 96px
-        xl: 'h-32 w-32', // 128px x 128px
-        '2xl': 'h-40 w-40', // 160px x 160px
-      },
-    },
-    defaultVariants: {
-      size: 'md',
-    },
-  }
-)
-
-interface BoundingBoxProps extends VariantProps<typeof boundingBoxVariants> {
-  children: React.ReactNode
-  className?: string
-}
-
-// Helper component to visualize spinner boundaries
-function BoundingBox({ children, size, className }: BoundingBoxProps) {
-  return (
-    <div className={cn(boundingBoxVariants({ size }), className)}>
-      {children}
-    </div>
-  )
-}
+import { getNameFromRegistry, getDescriptionFromRegistry } from '@/lib/utils'
 
 const codeExample = `import { Spinner } from '@/components/ui/loading'
 

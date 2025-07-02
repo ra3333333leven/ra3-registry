@@ -24,8 +24,8 @@ export function DemoPage({
     <PageContainer>
       <FlexColSpacing>
         <TitleDesc title={componentName} description={componentDescription} />
-        <ComponentPreview preview={previewContent} code={codeExample} />
         <InstallScript componentName={installScriptComponentName} />
+        <ComponentPreview preview={previewContent} code={codeExample} />
         {children}
       </FlexColSpacing>
     </PageContainer>

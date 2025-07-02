@@ -43,7 +43,7 @@ export function Code({
         }) => (
           <pre
             className={cn(
-              'w-full max-h-[650px] overflow-x-auto rounded-lg border py-4 px-4',
+              'w-full max-h-[700px] overflow-x-auto rounded-lg border py-4 px-4',
               prismClassName
             )}
             style={style}
