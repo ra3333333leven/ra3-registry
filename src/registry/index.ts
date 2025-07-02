@@ -46,7 +46,8 @@ export const registry: Registry = [
   {
     name: 'loading',
     type: 'registry:ui',
-    description: 'Minimal loading spinner components',
+    description:
+      'Loading spinner components with sizing options and visibility control',
     files: [{ path: 'ra3-ui/loading.tsx', type: 'registry:ui' }],
     dependencies: ['lucide-react'],
   },

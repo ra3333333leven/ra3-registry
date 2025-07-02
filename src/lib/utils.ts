@@ -57,7 +57,7 @@ export function generateNavigation(registry: Registry) {
     navMain: [
       {
         title: 'Components',
-        url: '/',
+        url: '/#components',
         items: groups.components.map((component) => ({
           title: formatComponentName(component.name || ''),
           url: `/${component.name || ''}`,
@@ -65,7 +65,7 @@ export function generateNavigation(registry: Registry) {
       },
       {
         title: 'Theme Components',
-        url: '/',
+        url: '/#theme-components',
         items: groups.themeComponents.map((component) => ({
           title: formatComponentName(component.name || ''),
           url: `/${component.name || ''}`,
@@ -73,7 +73,7 @@ export function generateNavigation(registry: Registry) {
       },
       {
         title: 'Hooks',
-        url: '/',
+        url: '/#hooks',
         items: groups.hooks.map((component) => ({
           title: formatComponentName(component.name || ''),
           url: `/${component.name || ''}`,

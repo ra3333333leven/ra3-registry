@@ -57,19 +57,19 @@ export default function HomePage() {
         />
 
         {/* Components Section */}
-        <div className="space-y-8">
+        <div id="components" className="space-y-8">
           <TitleDesc description="Components" />
           {renderComponentGrid(componentGroups.components)}
         </div>
 
         {/* Theme Components Section */}
-        <div className="space-y-8">
+        <div id="theme-components" className="space-y-8">
           <TitleDesc description="Theme Components" />
           {renderComponentGrid(componentGroups.themeComponents)}
         </div>
 
         {/* Hooks Section */}
-        <div className="space-y-8">
+        <div id="hooks" className="space-y-8">
           <TitleDesc description="Hooks" />
           {renderComponentGrid(componentGroups.hooks)}
         </div>
