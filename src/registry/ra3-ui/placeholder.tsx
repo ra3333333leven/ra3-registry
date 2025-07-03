@@ -1,5 +1,6 @@
 import { TitleDesc } from '@/registry/ra3-ui/typography'
 import { PageContainer } from './container'
+import React from 'react'
 
 // Replace this with something more dynamic, use lorem ipsum generators etc...
 function PlaceholderContentPage() {
@@ -38,4 +39,36 @@ function PlaceholderContentPage() {
   )
 }
 
-export { PlaceholderContentPage }
+// Placeholder page for when we don't have a real page
+function PlaceholderSkeletonPage({ children }: { children?: React.ReactNode }) {
+  // Dummy dashboard component with content
+  return (
+    <div className="bg-secondary flex h-full w-full flex-1 border-none">
+      <div className="relative flex h-full w-full flex-1 flex-col gap-2 border-none border-neutral-200 bg-white p-2 md:p-10 dark:border-neutral-700 dark:bg-neutral-900">
+        <div className="flex gap-2">
+          {Array.from({ length: 4 }).map((_, i) => (
+            <div
+              key={'first-array' + i}
+              className="h-20 w-full animate-pulse rounded-lg bg-gray-100 dark:bg-neutral-800"
+            ></div>
+          ))}
+        </div>
+        <div className="flex flex-1 gap-2">
+          {Array.from({ length: 2 }).map((_, i) => (
+            <div
+              key={'second-array' + i}
+              className="h-full w-full animate-pulse rounded-lg bg-gray-100 dark:bg-neutral-800"
+            ></div>
+          ))}
+        </div>
+        {children && (
+          <div className="absolute inset-0 flex items-center justify-center">
+            {children}
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}
+
+export { PlaceholderContentPage, PlaceholderSkeletonPage }
