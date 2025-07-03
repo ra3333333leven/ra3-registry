@@ -3,14 +3,13 @@ import { ComponentPreview } from '@/components/(shared)/component-preview'
 import { InstallScript } from '@/components/(shared)/install-script'
 import { getDescriptionFromRegistry, getNameFromRegistry } from '@/lib/utils'
 import {
+  FixedWidth,
   FlexColSpacing,
   FullPage,
   PageContainer,
+  YPadding,
 } from '@/registry/ra3-ui/container'
-import {
-  PlaceholderContentPage,
-  PlaceholderSkeletonPage,
-} from '@/registry/ra3-ui/placeholder'
+import { PlaceholderSkeletonPage } from '@/registry/ra3-ui/placeholder'
 import { TitleDesc } from '@/registry/ra3-ui/typography'
 
 export default function PlaceholderPage() {
@@ -26,12 +25,9 @@ export default function PlaceholderPage() {
         {/* PlaceholderSkeletonPage Component Demo */}
         <ComponentPreview
           title="PlaceholderSkeletonPage"
-          description="A skeleton loading placeholder for when content is not available - perfect for loading states"
-          preview={
-            <FullPage className="h-full w-full">
-              <PlaceholderSkeletonPage />
-            </FullPage>
-          }
+          description="A skeleton loading placeholder with optional title and description"
+          previewClassName="h-[500px]"
+          preview={<PlaceholderSkeletonPage />}
           code={`import { PlaceholderSkeletonPage } from '@/components/ui/placeholder'
 
 export default function Example() {
@@ -39,83 +35,103 @@ export default function Example() {
 }`}
         />
 
-        {/* PlaceholderSkeletonPage with Children Demo */}
+        {/* PlaceholderSkeletonPage with Title and Description Demo */}
         <ComponentPreview
-          title="PlaceholderSkeletonPage with Children"
-          description="The skeleton page can overlay children content for loading states with messages"
+          title="with Title and Description"
+          description="The skeleton page can display a title and description when provided"
+          previewClassName="h-[500px]"
           preview={
-            <FullPage className="h-full w-full">
-              <PlaceholderSkeletonPage>
-                <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-lg">
-                  <p className="text-sm font-medium">Loading content...</p>
-                </div>
-              </PlaceholderSkeletonPage>
-            </FullPage>
+            <PlaceholderSkeletonPage
+              title="Dashboard Loading"
+              desc="Please wait while we load your dashboard content..."
+            />
           }
           code={`import { PlaceholderSkeletonPage } from '@/components/ui/placeholder'
 
 export default function Example() {
   return (
-    <PlaceholderSkeletonPage>
-      <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-lg">
-        <p className="text-sm font-medium">Loading content...</p>
-      </div>
-    </PlaceholderSkeletonPage>
+    <PlaceholderSkeletonPage 
+      title="Dashboard Loading"
+      desc="Please wait while we load your dashboard content..."
+    />
   )
 }`}
         />
 
-        {/* PlaceholderContentPage Component Demo */}
+        {/* PlaceholderOverflowContent Component Demo */}
         <ComponentPreview
-          title="PlaceholderContentPage"
-          description="A content-rich placeholder page for demonstrating layouts and scrolling behavior"
+          title="PlaceholderOverflowContent"
+          description="A content-rich placeholder page with lorem ipsum content for demonstrating layouts and scrolling behavior"
+          previewClassName="h-[700px]"
           preview={
-            <FullPage className="h-full w-full overflow-auto">
-              <PlaceholderContentPage />
+            <FullPage>
+              <YPadding className="md:py-8">
+                <FixedWidth className="px-10">
+                  <TitleDesc
+                    title="Placeholder Content  "
+                    description="This is a placeholder page with overflow content to demonstrate scrolling behavior."
+                  />
+
+                  {/* Generate lots of lorem ipsum content to test scrolling */}
+                  {Array.from({ length: 7 }, (_, i) => (
+                    <div
+                      key={i}
+                      className="mt-6 mb-8 p-6 bg-card rounded-lg border"
+                    >
+                      <h2 className="text-2xl font-semibold mb-4">
+                        Lorem Ipsum Section {i + 1}
+                      </h2>
+                      <p className="text-muted-foreground mb-4">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                        sed do eiusmod tempor incididunt ut labore et dolore
+                        magna aliqua. Ut enim ad minim veniam, quis nostrud
+                        exercitation ullamco laboris nisi ut aliquip ex ea
+                        commodo consequat.
+                      </p>
+                      <p className="text-muted-foreground mb-4">
+                        Duis aute irure dolor in reprehenderit in voluptate
+                        velit esse cillum dolore eu fugiat nulla pariatur.
+                        Excepteur sint occaecat cupidatat non proident, sunt in
+                        culpa qui officia deserunt mollit anim id est laborum.
+                      </p>
+                      <p className="text-muted-foreground">
+                        Sed ut perspiciatis unde omnis iste natus error sit
+                        voluptatem accusantium doloremque laudantium, totam rem
+                        aperiam, eaque ipsa quae ab illo inventore veritatis et
+                        quasi architecto beatae vitae dicta sunt explicabo. Nemo
+                        enim ipsam voluptatem quia voluptas sit aspernatur aut
+                        odit aut fugit.
+                      </p>
+                    </div>
+                  ))}
+                </FixedWidth>
+              </YPadding>
             </FullPage>
           }
-          code={`import { PlaceholderContentPage } from '@/components/ui/placeholder'
+          code={`import { PlaceholderOverflowContent } from '@/components/ui/placeholder'
 
 export default function Example() {
-  return <PlaceholderContentPage />
+  return <PlaceholderOverflowContent />
 }`}
         />
 
-        {/* Usage Patterns */}
+        {/* Configuration Example */}
         <CodeExample
-          title="Usage Patterns"
-          description="Common patterns for using placeholder components in different scenarios"
-          code={`// Pattern 1: Loading State
-const [isLoading, setIsLoading] = useState(true)
+          title="Configuring Content Count"
+          description="The PlaceholderOverflowContent component accepts a count prop to control the number of content sections generated"
+          code={`import { PlaceholderOverflowContent } from '@/components/ui/placeholder'
 
-return (
-  <>
-    {isLoading ? (
-      <PlaceholderSkeletonPage>
-        <div>Loading your dashboard...</div>
-      </PlaceholderSkeletonPage>
-    ) : (
-      <YourActualContent />
-    )}
-  </>
-)
-
-// Pattern 2: Development Placeholder
-export default function UnfinishedPage() {
-  return (
-    <PlaceholderContentPage />
-  )
+// Default count (7 sections)
+export function DefaultPlaceholder() {
+  return <PlaceholderOverflowContent />
 }
 
-// Pattern 3: Error State with Skeleton
-export default function ErrorPage() {
+// Long content for extensive scrolling demos
+export function LongContentPlaceholder() {
   return (
-    <PlaceholderSkeletonPage>
-      <div className="text-center">
-        <h2>Something went wrong</h2>
-        <button>Try again</button>
-      </div>
-    </PlaceholderSkeletonPage>
+    <PlaceholderOverflowContent
+      count={15}
+    />
   )
 }`}
           language="tsx"

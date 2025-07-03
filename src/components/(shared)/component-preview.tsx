@@ -81,7 +81,7 @@ export function ComponentPreview({
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
             className={cn(
-              ' preview flex min-h-[350px] w-full items-center justify-center',
+              ' preview flex min-h-[350px] w-full items-center justify-center overflow-y-auto',
               align === 'start' && 'justify-start',
               align === 'end' && 'justify-end',
               'rounded-md border',

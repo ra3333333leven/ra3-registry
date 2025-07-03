@@ -1,55 +1,82 @@
 import { TitleDesc } from '@/registry/ra3-ui/typography'
-import { PageContainer } from './container'
+import { FullPage, PageContainer, YPadding } from './container'
 import React from 'react'
 
-// Replace this with something more dynamic, use lorem ipsum generators etc...
-function PlaceholderContentPage() {
+interface PlaceholderOverflowContentProps {
+  title?: string
+  desc?: string
+  count?: number
+}
+
+// Placeholder page with overflow content using lorem ipsum
+function PlaceholderOverflowContent({
+  title = 'Placeholder Content',
+  desc = 'This is a placeholder page with overflow content to demonstrate scrolling behavior.',
+  count = 7,
+}: PlaceholderOverflowContentProps) {
   return (
     <PageContainer>
-      <TitleDesc
-        title="Welcome to Home"
-        description="This is a placeholder page to demonstrate the layout and scrolling behavior of the application."
-      />
+      <TitleDesc title={title} description={desc} />
 
-      {/* Generate lots of content to test scrolling */}
-      {Array.from({ length: 20 }, (_, i) => (
+      {/* Generate lots of lorem ipsum content to test scrolling */}
+      {Array.from({ length: count }, (_, i) => (
         <div key={i} className="mt-6 mb-8 p-6 bg-card rounded-lg border">
-          <h2 className="text-2xl font-semibold mb-4">Section {i + 1}</h2>
+          <h2 className="text-2xl font-semibold mb-4">
+            Lorem Ipsum Section {i + 1}
+          </h2>
           <p className="text-muted-foreground mb-4">
-            This is section {i + 1} with some content to demonstrate scrolling
-            behavior. The header should remain sticky at the top as you scroll
-            through this content.
-          </p>
-          <p className="text-muted-foreground">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
             ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
             aliquip ex ea commodo consequat.
           </p>
+          <p className="text-muted-foreground mb-4">
+            Duis aute irure dolor in reprehenderit in voluptate velit esse
+            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+            cupidatat non proident, sunt in culpa qui officia deserunt mollit
+            anim id est laborum.
+          </p>
+          <p className="text-muted-foreground">
+            Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+            accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
+            quae ab illo inventore veritatis et quasi architecto beatae vitae
+            dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit
+            aspernatur aut odit aut fugit.
+          </p>
         </div>
       ))}
-
-      <div className="text-center py-16">
-        <p className="text-lg text-muted-foreground">
-          🎉 You&apos;ve reached the end! The header should have stayed sticky
-          throughout your scroll.
-        </p>
-      </div>
     </PageContainer>
   )
 }
 
-// Placeholder page for when we don't have a real page
-function PlaceholderSkeletonPage({ children }: { children?: React.ReactNode }) {
-  // Dummy dashboard component with content
+interface PlaceholderSkeletonPageProps {
+  title?: string
+  desc?: string
+}
+
+// Placeholder skeleton page for loading states
+function PlaceholderSkeletonPage({
+  title,
+  desc,
+}: PlaceholderSkeletonPageProps) {
   return (
-    <div className="bg-secondary flex h-full w-full flex-1 border-none">
-      <div className="relative flex h-full w-full flex-1 flex-col gap-2 border-none border-neutral-200 bg-white p-2 md:p-10 dark:border-neutral-700 dark:bg-neutral-900">
+    <FullPage className="bg-secondary flex h-full w-full flex-1 border-none">
+      <YPadding className="md:py-52 flex h-full w-full flex-col gap-2 border-none border-neutral-200 bg-white p-2 md:p-10 dark:border-neutral-700 dark:bg-neutral-900">
+        {/* Render title and description only if provided */}
+        {(title || desc) && (
+          <div className="mb-8 text-center">
+            <TitleDesc
+              title={title || 'Loading...'}
+              description={desc || 'Please wait while we load the content.'}
+            />
+          </div>
+        )}
+
         <div className="flex gap-2">
           {Array.from({ length: 4 }).map((_, i) => (
             <div
               key={'first-array' + i}
-              className="h-20 w-full animate-pulse rounded-lg bg-gray-100 dark:bg-neutral-800"
+              className="h-32 w-full animate-pulse rounded-lg bg-gray-100 dark:bg-neutral-800"
             ></div>
           ))}
         </div>
@@ -61,14 +88,9 @@ function PlaceholderSkeletonPage({ children }: { children?: React.ReactNode }) {
             ></div>
           ))}
         </div>
-        {children && (
-          <div className="absolute inset-0 flex items-center justify-center">
-            {children}
-          </div>
-        )}
-      </div>
-    </div>
+      </YPadding>
+    </FullPage>
   )
 }
 
-export { PlaceholderContentPage, PlaceholderSkeletonPage }
+export { PlaceholderOverflowContent, PlaceholderSkeletonPage }

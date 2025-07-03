@@ -11,6 +11,7 @@ View the component registry and demos at [ra3-registry.vercel.app](https://ra3-r
 [x] Navbar
 [x] Container
 [x] Typography
+[x] Placeholder
 
 ## Installing Components
 
