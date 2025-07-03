@@ -2,7 +2,7 @@
 
 import { ScriptCopyBtn } from '@/components/magicui/script-copy-btn'
 import { cn } from '@/lib/utils'
-import { HeaderDesc } from './typography'
+import { HeaderDesc } from '@/registry/ra3-ui/typography'
 
 interface InstallScriptProps {
   componentName: string
@@ -36,7 +36,7 @@ export function InstallScript({
   if (withHeader) {
     return (
       <div className="space-y-4">
-        <HeaderDesc title="Installation" />
+        <HeaderDesc header="Installation" />
         {scriptComponent}
       </div>
     )

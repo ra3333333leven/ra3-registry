@@ -105,6 +105,12 @@ export const registry: Registry = [
     registryDependencies: ['dropdown-menu', 'button'],
   },
   {
+    name: 'typography',
+    type: 'registry:ui',
+    description: 'Typography components for titles, descriptions, and headers',
+    files: [{ path: 'ra3-ui/typography.tsx', type: 'registry:ui' }],
+  },
+  {
     name: 'use-copy-to-clipboard',
     type: 'registry:hook',
     description: 'Custom hook for copying text with optional toasts',

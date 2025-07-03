@@ -4,7 +4,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { cn } from '@/lib/utils'
 import { motion } from 'motion/react'
 import * as React from 'react'
-import { HeaderDesc } from './typography'
+import { HeaderDesc } from '@/registry/ra3-ui/typography'
 import { Code } from './code'
 
 interface ComponentPreviewProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -41,7 +41,7 @@ export function ComponentPreview({
       {...props}
     >
       {(title || description) && (
-        <HeaderDesc title={title} description={description} />
+        <HeaderDesc header={title} description={description} />
       )}
       <Tabs
         defaultValue="preview"

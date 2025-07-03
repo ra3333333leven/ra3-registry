@@ -1,4 +1,4 @@
-import { TitleDesc } from '@/components/(shared)/typography'
+import { TitleDesc } from '@/registry/ra3-ui/typography'
 import {
   CardContent,
   CardDescription,

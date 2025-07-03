@@ -1,6 +1,6 @@
 import { ComponentPreview } from '@/components/(shared)/component-preview'
 import { CodeExample } from '@/components/(shared)/code-example'
-import { TitleDesc } from '@/components/(shared)/typography'
+import { TitleDesc } from '@/registry/ra3-ui/typography'
 import { InstallScript } from '@/components/(shared)/install-script'
 import { BoundingBox } from '@/components/(shared)/bounding-box'
 import {
@@ -21,10 +21,6 @@ export default function ContainerPage() {
           title={getNameFromRegistry('container')}
           description={getDescriptionFromRegistry('container')}
         />
-
-        {/* Installation */}
-        <InstallScript componentName="container" />
-
         {/* FullPage Component Demo */}
         <ComponentPreview
           title="FullPage"
@@ -291,6 +287,9 @@ const DEFAULT_DEBUG = false                     // Default debug state`}
 </PageContainer>`}
           language="tsx"
         />
+
+        {/* Installation */}
+        <InstallScript componentName="container" />
       </FlexColSpacing>
     </PageContainer>
   )

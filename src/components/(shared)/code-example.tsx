@@ -2,7 +2,7 @@
 
 import { cn } from '@/lib/utils'
 import { Code } from './code'
-import { HeaderDesc } from './typography'
+import { HeaderDesc } from '@/registry/ra3-ui/typography'
 
 interface CodeExampleProps {
   code: string
@@ -24,7 +24,7 @@ export function CodeExample({
   return (
     <div className={cn('space-y-4', className)}>
       {(title || description) && (
-        <HeaderDesc title={title} description={description} />
+        <HeaderDesc header={title} description={description} />
       )}
       <Code code={code} language={language} copy={copy} />
     </div>

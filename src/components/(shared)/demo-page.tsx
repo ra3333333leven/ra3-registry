@@ -1,6 +1,6 @@
 import { ComponentPreview } from '@/components/(shared)/component-preview'
 import { InstallScript } from '@/components/(shared)/install-script'
-import { TitleDesc } from '@/components/(shared)/typography'
+import { TitleDesc } from '@/registry/ra3-ui/typography'
 import { PageContainer, FlexColSpacing } from '@/registry/ra3-ui/container'
 
 interface DemoPageProps {
@@ -24,8 +24,8 @@ export function DemoPage({
     <PageContainer>
       <FlexColSpacing>
         <TitleDesc title={componentName} description={componentDescription} />
-        <InstallScript componentName={installScriptComponentName} />
         <ComponentPreview preview={previewContent} code={codeExample} />
+        <InstallScript componentName={installScriptComponentName} />
         {children}
       </FlexColSpacing>
     </PageContainer>
