@@ -5,7 +5,30 @@ import { twMerge } from 'tailwind-merge'
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
+
 // Registry utility functions
+/**
+ * Gets the install script for a specific package manager and component
+ */
+export function getInstallScript(
+  componentName: string,
+  pm: 'pnpm' | 'npm' = 'pnpm'
+): string {
+  const commandMap = getInstallScriptMap(componentName)
+  return commandMap[pm]
+}
+
+/**
+ * Gets the complete install command map for a component
+ */
+export function getInstallScriptMap(componentName: string) {
+  const registryUrl = `${process.env.NEXT_PUBLIC_URL}/registry/${componentName}.json`
+
+  return {
+    pnpm: `pnpm dlx shadcn@latest add ${registryUrl}`,
+    npm: `npx shadcn@latest add ${registryUrl}`,
+  }
+}
 
 /**
  * Groups registry components into categories based on type and name

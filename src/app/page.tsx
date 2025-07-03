@@ -5,8 +5,19 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import { getComponentGroups } from '@/lib/utils'
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from '@/components/ui/tooltip'
+import {
+  getComponentGroups,
+  getInstallScript,
+  formatComponentName,
+  generateNavigation,
+} from '@/lib/utils'
 import { Card } from '@/registry/ra3-ui/card'
+import { CopyClip } from '@/registry/ra3-ui/copy-clip'
 import { FlexColSpacing, PageContainer } from '@/registry/ra3-ui/container'
 import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
@@ -19,31 +30,56 @@ export default function HomePage() {
     components: typeof componentGroups.components
   ) => (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {components.map((component) => (
-        <Link
-          key={component.name || 'unnamed'}
-          href={`/${component.name || ''}`}
-        >
-          <Card
-            withGradient
-            withShadow
-            withHoverAnimation
-            className="group h-full"
-          >
-            <CardHeader>
-              <CardTitle className="text-xl capitalize">
-                {component.name?.replace('-', ' ') || 'Unnamed Component'}
-              </CardTitle>
-              <CardDescription className="text-sm leading-relaxed">
-                {component.description}
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="flex-1 flex items-end justify-end">
-              <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all duration-200" />
-            </CardContent>
-          </Card>
-        </Link>
-      ))}
+      {components.map((component) => {
+        if (!component.name) {
+          throw new Error('Component must have a name', { cause: component })
+        }
+        if (!component.description) {
+          throw new Error('Component must have a description', {
+            cause: component,
+          })
+        }
+
+        return (
+          <div key={component.name} className="relative group">
+            <Link href={`/${component.name}`}>
+              <Card
+                withGradient
+                withShadow
+                withHoverAnimation
+                className="h-full"
+              >
+                <CardHeader>
+                  <CardTitle className="text-xl capitalize">
+                    {formatComponentName(component.name)}
+                  </CardTitle>
+                  <CardDescription className="text-sm leading-relaxed">
+                    {component.description}
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="flex-1 flex items-end justify-end">
+                  <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all duration-200" />
+                </CardContent>
+              </Card>
+            </Link>
+            <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-10">
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <div>
+                    <CopyClip
+                      textToCopy={getInstallScript(component.name)}
+                      variant="outline"
+                    />
+                  </div>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Copy Install Script</p>
+                </TooltipContent>
+              </Tooltip>
+            </div>
+          </div>
+        )
+      })}
     </div>
   )
 
@@ -55,23 +91,22 @@ export default function HomePage() {
           description="A collection of production ready UI components and hooks"
         />
 
-        {/* Components Section */}
-        <div id="components" className="space-y-8">
-          <TitleDesc description="Components" />
-          {renderComponentGrid(componentGroups.components)}
-        </div>
-
-        {/* Theme Components Section */}
-        <div id="theme-components" className="space-y-8">
-          <TitleDesc description="Theme Components" />
-          {renderComponentGrid(componentGroups.themeComponents)}
-        </div>
-
-        {/* Hooks Section */}
-        <div id="hooks" className="space-y-8">
-          <TitleDesc description="Hooks" />
-          {renderComponentGrid(componentGroups.hooks)}
-        </div>
+        {generateNavigation().navMain.map((section) => (
+          <div
+            key={section.url}
+            id={section.url.replace('/#', '')}
+            className="space-y-8"
+          >
+            <TitleDesc description={section.title} />
+            {renderComponentGrid(
+              section.title === 'Components'
+                ? componentGroups.components
+                : section.title === 'Theme Components'
+                  ? componentGroups.themeComponents
+                  : componentGroups.hooks
+            )}
+          </div>
+        ))}
       </FlexColSpacing>
     </PageContainer>
   )
