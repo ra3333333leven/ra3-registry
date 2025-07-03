@@ -105,6 +105,14 @@ export const registry: Registry = [
     registryDependencies: ['dropdown-menu', 'button'],
   },
   {
+    name: 'skeleton',
+    type: 'registry:ui',
+    description:
+      'Skeleton loading components with variants and flexible layouts',
+    files: [{ path: 'ra3-ui/skeleton.tsx', type: 'registry:ui' }],
+    registryDependencies: ['skeleton'],
+  },
+  {
     name: 'typography',
     type: 'registry:ui',
     description: 'Typography components for titles, descriptions, and headers',

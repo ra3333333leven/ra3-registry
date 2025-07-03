@@ -1,4 +1,3 @@
-import { TitleDesc } from '@/registry/ra3-ui/typography'
 import {
   CardContent,
   CardDescription,
@@ -11,14 +10,15 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip'
 import {
-  getComponentGroups,
-  getInstallScript,
   formatComponentName,
   generateNavigation,
+  getComponentGroups,
+  getInstallScript,
 } from '@/lib/utils'
 import { Card } from '@/registry/ra3-ui/card'
-import { CopyClip } from '@/registry/ra3-ui/copy-clip'
 import { FlexColSpacing, PageContainer } from '@/registry/ra3-ui/container'
+import { CopyClip } from '@/registry/ra3-ui/copy-clip'
+import { TitleDesc } from '@/registry/ra3-ui/typography'
 import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 

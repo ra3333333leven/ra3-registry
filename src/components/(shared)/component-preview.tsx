@@ -74,14 +74,14 @@ export function ComponentPreview({
           </TabsList>
         </div>
 
-        <TabsContent value="preview" className="relative rounded-md">
+        <TabsContent value="preview" className="relative rounded-md ">
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
             className={cn(
-              'preview flex min-h-[350px] w-full items-center justify-center p-10',
+              ' preview flex min-h-[350px] w-full items-center justify-center',
               align === 'start' && 'justify-start',
               align === 'end' && 'justify-end',
               'rounded-md border',
