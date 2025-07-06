@@ -1,17 +1,16 @@
 import { ComponentPreview } from '@/components/(shared)/component-preview'
-import { CodeExample } from '@/components/(shared)/code-example'
-import { TitleDesc } from '@/registry/ra3-ui/typography'
 import { InstallScript } from '@/components/(shared)/install-script'
 import {
-  SkeletonProfile,
-  SkeletonText,
   SkeletonCard,
+  SkeletonProfile,
   SkeletonRectangle,
   SkeletonSquare,
+  SkeletonText,
 } from '@/registry/ra3-ui/skeleton'
+import { TitleDesc } from '@/registry/ra3-ui/typography'
 
-import { PageContainer, FlexColSpacing } from '@/registry/ra3-ui/container'
-import { getNameFromRegistry, getDescriptionFromRegistry } from '@/lib/utils'
+import { getDescriptionFromRegistry, getNameFromRegistry } from '@/lib/utils'
+import { FlexColSpacing, PageContainer } from '@/registry/ra3-ui/container'
 
 export default function SkeletonPage() {
   return (
