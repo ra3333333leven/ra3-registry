@@ -111,6 +111,14 @@ export const registry: Registry = [
     files: [{ path: 'ra3-ui/typography.tsx', type: 'registry:ui' }],
   },
   {
+    name: 'skeleton',
+    type: 'registry:ui',
+    description:
+      'Dynamic skeleton components that automatically resize based on their parent container',
+    files: [{ path: 'ra3-ui/skeleton.tsx', type: 'registry:ui' }],
+    registryDependencies: ['skeleton'],
+  },
+  {
     name: 'use-copy-to-clipboard',
     type: 'registry:hook',
     description: 'Custom hook for copying text with optional toasts',

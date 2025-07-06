@@ -29,6 +29,7 @@ export function ComponentPreview({
   ...props
 }: ComponentPreviewProps) {
   const [activeTab, setActiveTab] = React.useState('preview')
+  const uniqueId = React.useId()
 
   const tabs = [
     { value: 'preview', label: 'Preview' },
@@ -60,7 +61,7 @@ export function ComponentPreview({
                 {activeTab === tab.value && (
                   <motion.div
                     className="absolute inset-x-0 bottom-[1px] mx-auto h-0.5 bg-primary"
-                    layoutId="activeTabIndicator"
+                    layoutId={`activeTabIndicator-${uniqueId}`}
                     initial={false}
                     transition={{
                       type: 'spring',
@@ -81,7 +82,7 @@ export function ComponentPreview({
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
             className={cn(
-              ' preview flex min-h-[350px] w-full items-center justify-center overflow-y-auto',
+              ' preview flex min-h-[350px] w-full items-center justify-center overflow-y-auto p-6',
               align === 'start' && 'justify-start',
               align === 'end' && 'justify-end',
               'rounded-md border',
