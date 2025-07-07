@@ -1,4 +1,4 @@
-# ra3 Registry
+# ra3-ui
 
 A component registry for ra3's components, built with [simple-shadcn-cli](https://github.com/Alwurts/simple-shadcn-cli).
 
