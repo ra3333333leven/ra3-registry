@@ -63,13 +63,24 @@ export function SkeletonProfile({
 }
 
 // Card skeleton component
-type SkeletonCardProps = WithSkeletonText
+type SkeletonCardProps = WithSkeletonText & {
+  skeletonCardClassName?: string
+}
 
-export function SkeletonCard({ skeletonText }: SkeletonCardProps) {
+export function SkeletonCard({
+  skeletonText,
+  skeletonCardClassName,
+}: SkeletonCardProps) {
   return (
     <div className="w-full h-full flex flex-col gap-4 rounded-xl min-h-0">
       {/* Header/Image area - takes up more space */}
-      <div className={cn('min-h-[60px]', skeletonText ? 'flex-[2]' : 'flex-1')}>
+      <div
+        className={cn(
+          'min-h-[60px]',
+          skeletonText ? 'flex-[2]' : 'flex-1',
+          skeletonCardClassName
+        )}
+      >
         <SkeletonRectangle />
       </div>
 
