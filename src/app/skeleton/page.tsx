@@ -1,5 +1,6 @@
 import { ComponentPreview } from '@/components/(shared)/component-preview'
 import { InstallScript } from '@/components/(shared)/install-script'
+import { CodeExample } from '@/components/(shared)/code-example'
 import {
   SkeletonCard,
   SkeletonProfile,
@@ -366,6 +367,115 @@ export default function Example() {
     </div>
   )
 }`}
+        />
+
+        {/* Custom Skeleton with Modifiers */}
+        <CodeExample
+          title="Custom Skeleton with Wrapper Modifiers"
+          description="Use the Skeleton wrapper to repeat custom skeleton content with count and direction modifiers"
+          code={`import { Skeleton } from '@/components/skeleton'
+
+// Custom skeleton repeated 3 times vertically
+<Skeleton count={3} direction="vertical">
+  <div className="flex gap-3">
+    <div className="w-8 h-8 bg-gray-200 rounded-full animate-pulse" />
+    <div className="flex-1 space-y-2">
+      <div className="h-3 bg-gray-200 rounded animate-pulse" />
+      <div className="h-3 bg-gray-200 rounded w-2/3 animate-pulse" />
+    </div>
+  </div>
+</Skeleton>
+
+// Custom skeleton repeated 4 times horizontally
+<Skeleton count={4} direction="horizontal">
+  <div className="w-16 h-16 bg-gray-200 rounded-lg animate-pulse" />
+</Skeleton>`}
+        />
+
+        {/* Custom Gap with className */}
+        <CodeExample
+          title="Customizing Gap with className"
+          description="Use className to modify the gap between skeleton items by overriding the container styles"
+          code={`import { Skeleton } from '@/components/skeleton'
+
+// Custom gap using className (overrides default gap-2)
+<Skeleton 
+  skeletonShape="profile" 
+  count={3} 
+  direction="vertical"
+  className="gap-6"
+/>
+
+// Custom gap for horizontal layout
+<Skeleton 
+  skeletonShape="square" 
+  count={4} 
+  direction="horizontal"
+  className="gap-8"
+/>
+
+// No gap
+<Skeleton 
+  skeletonShape="rectangle" 
+  count={2} 
+  direction="horizontal"
+  className="gap-0"
+/>`}
+        />
+
+        {/* Complete Usage Guide */}
+        <CodeExample
+          title="Complete Usage Guide"
+          description="Best practices for using the Skeleton component system"
+          code={`import { 
+  Skeleton, 
+  SkeletonCard, 
+  SkeletonProfile, 
+  SkeletonText,
+  SkeletonRectangle,
+  SkeletonSquare 
+} from '@/components/skeleton'
+
+// 1. Use Skeleton component for simple shapes (recommended)
+<Skeleton skeletonShape="profile" />
+<Skeleton skeletonShape="card" count={3} />
+<Skeleton skeletonShape="rectangle" count={2} direction="horizontal" />
+
+// 2. Use Skeleton as wrapper for custom skeletons
+<Skeleton count={3} direction="vertical">
+  <div className="flex gap-2">
+    <div className="w-10 h-10 bg-gray-200 rounded animate-pulse" />
+    <div className="flex-1 space-y-1">
+      <div className="h-3 bg-gray-200 rounded animate-pulse" />
+      <div className="h-3 bg-gray-200 rounded w-3/4 animate-pulse" />
+    </div>
+  </div>
+</Skeleton>
+
+// 3. Use base shapes for composition when you need customization
+<Skeleton count={2} direction="horizontal">
+  <div className="space-y-3">
+    <SkeletonProfile skeletonText={{ count: 3 }} />
+    <SkeletonCard skeletonText={{ count: 1 }} />
+  </div>
+</Skeleton>
+
+// 4. Use base shapes directly only when building complex custom layouts
+<div className="grid grid-cols-2 gap-4">
+  <div className="h-[100px]">
+    <SkeletonRectangle />
+  </div>
+  <div className="space-y-2">
+    <SkeletonText count={3} />
+  </div>
+</div>
+
+// RULE OF THUMB:
+// - Almost always use <Skeleton> component
+// - Use skeletonShape prop for built-in shapes
+// - Use children for custom skeleton content
+// - Use base shapes as children when you need their props
+// - Use base shapes directly only for complex custom layouts`}
         />
 
         {/* Installation */}
