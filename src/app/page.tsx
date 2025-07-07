@@ -43,12 +43,7 @@ export default function HomePage() {
         return (
           <div key={component.name} className="relative group">
             <Link href={`/${component.name}`}>
-              <Card
-                withGradient
-                withShadow
-                withHoverAnimation
-                className="h-full"
-              >
+              <Card gradient shadow hoverAnimation className="h-full">
                 <CardHeader>
                   <CardTitle className="text-xl capitalize">
                     {formatComponentName(component.name)}
