@@ -1,36 +1,37 @@
-import { Skeleton } from '@/components/ui/skeleton'
+import { Skeleton as ShadcnSkeleton } from '@/components/ui/skeleton'
 import { cn } from '@/lib/utils'
+import { cva, type VariantProps } from 'class-variance-authority'
 
 // Base skeleton components
-export function SkeletonRectangle() {
-  return <Skeleton className="w-full h-full rounded-lg" />
+function SkeletonRectangle() {
+  return <ShadcnSkeleton className="w-full h-full rounded-lg" />
 }
 
-export function SkeletonSquare() {
+function SkeletonSquare() {
   return (
     <div className="aspect-square max-w-full max-h-full">
-      <Skeleton className="w-full h-full rounded-lg" />
+      <ShadcnSkeleton className="w-full h-full rounded-lg" />
     </div>
   )
 }
 
 // Text skeleton component
-export interface SkeletonTextProps {
+interface SkeletonTextProps {
   count?: number
 }
 
 // Reusable type for components that optionally include skeleton text
-export type WithSkeletonText<T = object> = T & {
+type WithSkeletonText<T = object> = T & {
   skeletonText?: true | SkeletonTextProps
 }
 
-export function SkeletonText({ count = 1 }: SkeletonTextProps) {
+function SkeletonText({ count = 1 }: SkeletonTextProps) {
   return (
     <div className="flex flex-col justify-center gap-2 h-full">
       {Array.from({ length: count }).map((_, index) => {
         const isLast = index === count - 1 && count > 1
         return (
-          <Skeleton
+          <ShadcnSkeleton
             key={index}
             className={`rounded-full flex-1 ${isLast ? 'w-[85%]' : 'w-full'}`}
           />
@@ -43,13 +44,11 @@ export function SkeletonText({ count = 1 }: SkeletonTextProps) {
 // Profile skeleton component
 type SkeletonProfileProps = WithSkeletonText
 
-export function SkeletonProfile({
-  skeletonText = true,
-}: SkeletonProfileProps = {}) {
+function SkeletonProfile({ skeletonText = true }: SkeletonProfileProps = {}) {
   return (
     <div className="flex items-center gap-4 h-full">
       <div className="aspect-square h-full">
-        <Skeleton className="w-full h-full rounded-full" />
+        <ShadcnSkeleton className="w-full h-full rounded-full" />
       </div>
       <div className="flex-1 h-3/5">
         {skeletonText === true ? (
@@ -67,8 +66,8 @@ type SkeletonCardProps = WithSkeletonText & {
   skeletonCardClassName?: string
 }
 
-export function SkeletonCard({
-  skeletonText,
+function SkeletonCard({
+  skeletonText = true,
   skeletonCardClassName,
 }: SkeletonCardProps) {
   return (
@@ -76,7 +75,7 @@ export function SkeletonCard({
       {/* Header/Image area - takes up more space */}
       <div
         className={cn(
-          'min-h-[60px]',
+          'min-h-[60%]',
           skeletonText ? 'flex-[2]' : 'flex-1',
           skeletonCardClassName
         )}
@@ -86,7 +85,7 @@ export function SkeletonCard({
 
       {/* Text content area - takes up less space */}
       {skeletonText && (
-        <div className="flex-1 min-h-[40px]">
+        <div className="flex-1">
           <SkeletonText
             {...(skeletonText === true
               ? {
@@ -98,4 +97,93 @@ export function SkeletonCard({
       )}
     </div>
   )
+}
+
+// Skeleton wrapper component
+type SkeletonShape = 'rectangle' | 'square' | 'text' | 'profile' | 'card'
+
+const skeletonVariants = cva('flex gap-2', {
+  variants: {
+    direction: {
+      vertical: 'flex-col',
+      horizontal: 'flex-row',
+    },
+  },
+  defaultVariants: {
+    direction: 'vertical',
+  },
+})
+
+interface SkeletonProps extends VariantProps<typeof skeletonVariants> {
+  skeletonShape?: SkeletonShape
+  count?: number
+  children?: React.ReactNode
+  className?: string
+}
+
+function Skeleton({
+  skeletonShape = 'rectangle',
+  count = 1,
+  direction,
+  children,
+  className,
+}: SkeletonProps) {
+  // Render the skeleton shape based on the prop or children
+  const renderSkeletonShape = () => {
+    // If children are provided, use them as custom skeletons
+    if (children) {
+      return children
+    }
+
+    // Otherwise render based on skeletonShape prop with defaults
+    switch (skeletonShape) {
+      case 'rectangle':
+        return <SkeletonRectangle />
+      case 'square':
+        return <SkeletonSquare />
+      case 'text':
+        return <SkeletonText />
+      case 'profile':
+        return <SkeletonProfile />
+      case 'card':
+        return <SkeletonCard />
+      default:
+        return <SkeletonRectangle />
+    }
+  }
+
+  // If count is 1, render single skeleton without wrapper
+  if (count === 1) {
+    return (
+      <div className={cn('h-full w-full', className)}>
+        {renderSkeletonShape()}
+      </div>
+    )
+  }
+
+  // Render multiple skeletons with direction layout
+  return (
+    <div
+      className={cn(
+        'h-full w-full',
+        skeletonVariants({ direction }),
+        className
+      )}
+    >
+      {Array.from({ length: count }).map((_, index) => (
+        <div key={index} className="flex-1">
+          {renderSkeletonShape()}
+        </div>
+      ))}
+    </div>
+  )
+}
+
+export {
+  SkeletonRectangle,
+  SkeletonSquare,
+  SkeletonText,
+  SkeletonProfile,
+  SkeletonCard,
+  Skeleton,
 }

@@ -6,6 +6,7 @@ import {
   SkeletonRectangle,
   SkeletonSquare,
   SkeletonText,
+  Skeleton,
 } from '@/registry/ra3-ui/skeleton'
 import { TitleDesc } from '@/registry/ra3-ui/typography'
 
@@ -20,6 +21,119 @@ export default function SkeletonPage() {
         <TitleDesc
           title={getNameFromRegistry('skeleton')}
           description={getDescriptionFromRegistry('skeleton')}
+        />
+
+        {/* Skeleton Wrapper Component */}
+        <ComponentPreview
+          title="Skeleton Component"
+          description="Flexible wrapper component that can render multiple skeleton shapes with different layouts"
+          preview={
+            <div className="space-y-6 w-full">
+              {/* Shape examples */}
+              <div className="space-y-2">
+                <h3 className="text-sm font-medium text-muted-foreground">
+                  Different Shapes
+                </h3>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div className="h-[140px] border-2 border-dashed border-muted-foreground/30 rounded-lg p-2">
+                    <Skeleton skeletonShape="rectangle" />
+                  </div>
+                  <div className="h-[140px] border-2 border-dashed border-muted-foreground/30 rounded-lg p-2">
+                    <Skeleton skeletonShape="profile" />
+                  </div>
+                  <div className="h-[140px] border-2 border-dashed border-muted-foreground/30 rounded-lg p-2">
+                    <Skeleton skeletonShape="card" />
+                  </div>
+                </div>
+              </div>
+
+              {/* Count examples */}
+              <div className="space-y-2">
+                <h3 className="text-sm font-medium text-muted-foreground">
+                  Multiple Count - Vertical Layout
+                </h3>
+                <div className="h-[200px] border-2 border-dashed border-muted-foreground/30 rounded-lg p-2">
+                  <Skeleton skeletonShape="profile" count={3} />
+                </div>
+              </div>
+
+              {/* Direction examples */}
+              <div className="space-y-2">
+                <h3 className="text-sm font-medium text-muted-foreground">
+                  Multiple Count - Horizontal Layout
+                </h3>
+                <div className="h-[100px] border-2 border-dashed border-muted-foreground/30 rounded-lg p-2">
+                  <Skeleton
+                    skeletonShape="square"
+                    count={4}
+                    direction="horizontal"
+                  />
+                </div>
+              </div>
+
+              {/* Custom children */}
+              <div className="space-y-2">
+                <h3 className="text-sm font-medium text-muted-foreground">
+                  Custom Skeleton with Children
+                </h3>
+                <div className="h-[120px] border-2 border-dashed border-muted-foreground/30 rounded-lg p-2">
+                  <Skeleton count={2} direction="horizontal">
+                    <div className="flex items-center gap-4 p-3 rounded-lg">
+                      <div className="flex-shrink-0">
+                        <div className="w-12 h-12 bg-gray-200 rounded-full animate-pulse" />
+                      </div>
+                      <div className="flex-1 space-y-3">
+                        <div className="flex items-center gap-2">
+                          <div className="h-4 bg-gray-200 rounded animate-pulse w-24" />
+                          <div className="w-2 h-2 bg-gray-200 rounded-full animate-pulse" />
+                          <div className="h-3 bg-gray-200 rounded animate-pulse w-16" />
+                        </div>
+                        <div className="space-y-2">
+                          <div className="h-3 bg-gray-200 rounded animate-pulse" />
+                          <div className="h-3 bg-gray-200 rounded animate-pulse w-4/5" />
+                        </div>
+                      </div>
+                    </div>
+                  </Skeleton>
+                </div>
+              </div>
+            </div>
+          }
+          code={`import { Skeleton } from '@/components/skeleton'
+
+export default function Example() {
+  return (
+    <div className="space-y-6">
+      {/* Single shapes */}
+      <div className="h-[100px]">
+        <Skeleton skeletonShape="profile" />
+      </div>
+
+      {/* Multiple vertical */}
+      <div className="h-[200px]">
+        <Skeleton skeletonShape="profile" count={3} />
+      </div>
+
+      {/* Multiple horizontal */}
+      <div className="h-[100px]">
+        <Skeleton skeletonShape="square" count={4} direction="horizontal" />
+      </div>
+
+      {/* Custom skeleton */}
+      <div className="h-[120px]">
+        <Skeleton count={2} direction="horizontal">
+          <div className="flex gap-3">
+            <div className="w-8 h-8 bg-gray-200 rounded-full animate-pulse" />
+            <div className="flex-1 space-y-2">
+              <div className="h-3 bg-gray-200 rounded animate-pulse" />
+              <div className="h-3 bg-gray-200 rounded w-2/3 animate-pulse" />
+            </div>
+          </div>
+        </Skeleton>
+      </div>
+    </div>
+  )
+}`}
         />
 
         {/* Base Skeleton Components */}
