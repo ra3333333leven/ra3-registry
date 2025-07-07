@@ -2,9 +2,7 @@
   "name": "theme-provider",
   "type": "registry:ui",
   "description": "A theme provider component wrapping next-themes ThemeProvider",
-  "dependencies": [
-    "next-themes"
-  ],
+  "dependencies": ["next-themes"],
   "files": [
     {
       "path": "ra3-ui/theme-provider.tsx",

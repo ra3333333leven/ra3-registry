@@ -8,13 +8,13 @@
 ```ts
 export const registry: Registry = [
   {
-    name: "my-button",
-    type: "registry:ui", 
-    description: "Custom button component",
-    files: [{ path: "ra3-ui/my-button.tsx", type: "registry:ui" }],
-    dependencies: ["framer-motion"], // npm dependencies
-    registryDependencies: ["button"] // shadcn components
-  }
+    name: 'my-button',
+    type: 'registry:ui',
+    description: 'Custom button component',
+    files: [{ path: 'ra3-ui/my-button.tsx', type: 'registry:ui' }],
+    dependencies: ['framer-motion'], // npm dependencies
+    registryDependencies: ['button'], // shadcn components
+  },
 ]
 ```
 
@@ -23,14 +23,16 @@ export const registry: Registry = [
 5. Commit and Push to main: `git acp "add: my-button"`
 
 The component will automatically appear in the correct section:
+
 - **Components**: UI components without "theme" in the name
-- **Theme Components**: UI components with "theme" in the name  
+- **Theme Components**: UI components with "theme" in the name
 - **Hooks**: Components with `type: "registry:hook"`
 
 ## Path Conversion & Target Installation
 
 The build process automatically:
-- Converts file paths from `ui/` to `ra3-ui/` 
+
+- Converts file paths from `ui/` to `ra3-ui/`
 - Adds `target` properties to install components in `components/ra3-ui/` directory
 
 This ensures components are installed in the correct location when users run the shadcn CLI.
@@ -60,4 +62,4 @@ You can create meta-components that bundle multiple related components:
   dependencies: ["next-themes", "lucide-react"],
   registryDependencies: ["dropdown-menu", "button"]
 }
-``` 
+```

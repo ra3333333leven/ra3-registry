@@ -2,13 +2,8 @@
   "name": "navbar",
   "type": "registry:ui",
   "description": "A responsive navigation bar with smooth animations and theme toggle support",
-  "dependencies": [
-    "framer-motion"
-  ],
-  "registryDependencies": [
-    "use-mobile",
-    "/registry/theme-toggle.json"
-  ],
+  "dependencies": ["framer-motion"],
+  "registryDependencies": ["use-mobile", "/registry/theme-toggle.json"],
   "files": [
     {
       "path": "ra3-ui/navbar.tsx",

@@ -2,14 +2,8 @@
   "name": "theme-dropdown",
   "type": "registry:ui",
   "description": "A dropdown menu for theme selection with light, dark, and system options",
-  "dependencies": [
-    "next-themes",
-    "lucide-react"
-  ],
-  "registryDependencies": [
-    "dropdown-menu",
-    "button"
-  ],
+  "dependencies": ["next-themes", "lucide-react"],
+  "registryDependencies": ["dropdown-menu", "button"],
   "files": [
     {
       "path": "ra3-ui/theme-dropdown.tsx",

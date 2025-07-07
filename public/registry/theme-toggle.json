@@ -2,10 +2,7 @@
   "name": "theme-toggle",
   "type": "registry:ui",
   "description": "A simple toggle button for switching between light and dark themes",
-  "dependencies": [
-    "next-themes",
-    "lucide-react"
-  ],
+  "dependencies": ["next-themes", "lucide-react"],
   "files": [
     {
       "path": "ra3-ui/theme-toggle.tsx",
