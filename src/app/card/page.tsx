@@ -1,6 +1,9 @@
 'use client'
 
-import { DemoPage } from '@/components/(shared)/demo-page'
+import { ComponentPreview } from '@/components/(shared)/component-preview'
+import { TitleDesc } from '@/registry/ra3-ui/typography'
+import { InstallScript } from '@/components/(shared)/install-script'
+import { PageContainer, FlexColSpacing } from '@/registry/ra3-ui/container'
 import { Card } from '@/registry/ra3-ui/card'
 import {
   CardContent,
@@ -26,6 +29,23 @@ export default function Example() {
         </CardHeader>
         <CardContent>
           <p>This is the basic card content.</p>
+        </CardContent>
+      </Card>
+
+      {/* Card with Title Prop */}
+      <Card title="Title Prop Card">
+        <CardContent>
+          <p>This card uses the title prop to automatically render a CardHeader.</p>
+        </CardContent>
+      </Card>
+
+      {/* Card with Title & Description Props */}
+      <Card 
+        title="Props-based Card" 
+        description="This card automatically renders header content using props"
+      >
+        <CardContent>
+          <p>Both title and description are provided via props.</p>
         </CardContent>
       </Card>
 
@@ -101,6 +121,19 @@ export default function Example() {
         </CardHeader>
         <CardContent>
           <p>This card has custom laser border colors and animation.</p>
+        </CardContent>
+      </Card>
+
+      {/* Props with Effects */}
+      <Card 
+        title="Enhanced Props Card" 
+        description="Using title and description props with visual effects"
+        gradient
+        shadow
+        hoverAnimation
+      >
+        <CardContent>
+          <p>This demonstrates props working with visual effects.</p>
         </CardContent>
       </Card>
 
@@ -281,12 +314,80 @@ function CardPreview() {
 
 export default function CardPage() {
   return (
-    <DemoPage
-      componentName={getNameFromRegistry('card')}
-      componentDescription={getDescriptionFromRegistry('card')}
-      previewContent={<CardPreview />}
-      codeExample={codeExample}
-      installScriptComponentName="card"
-    />
+    <PageContainer>
+      <FlexColSpacing>
+        {/* Header */}
+        <TitleDesc
+          title={getNameFromRegistry('card')}
+          description={getDescriptionFromRegistry('card')}
+        />
+
+        {/* Title & Description Props Demo */}
+        <ComponentPreview
+          title="Card with Title & Description Props"
+          description="Card using title and description props for automatic header rendering"
+          preview={
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <Card title="Title Prop Card">
+                <CardContent>
+                  <p>
+                    This card uses the title prop to automatically render a
+                    CardHeader with CardTitle.
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card
+                title="Props-based Card"
+                description="This card automatically renders header content using props"
+              >
+                <CardContent>
+                  <p>
+                    Both title and description are provided via props, making
+                    the card easier to use.
+                  </p>
+                </CardContent>
+              </Card>
+            </div>
+          }
+          code={`import { Card } from '@/registry/ra3-ui/card'
+import { CardContent } from '@/components/ui/card'
+
+export default function Example() {
+  return (
+    <div className="space-y-6">
+      {/* Card with Title Prop */}
+      <Card title="Title Prop Card">
+        <CardContent>
+          <p>This card uses the title prop to automatically render a CardHeader with CardTitle.</p>
+        </CardContent>
+      </Card>
+
+      {/* Card with Title & Description Props */}
+      <Card 
+        title="Props-based Card" 
+        description="This card automatically renders header content using props"
+      >
+        <CardContent>
+          <p>Both title and description are provided via props, making the card easier to use.</p>
+        </CardContent>
+      </Card>
+    </div>
+  )
+}`}
+        />
+
+        {/* All Card Variants Demo */}
+        <ComponentPreview
+          title="Card Style Variants"
+          description="Comprehensive showcase of all card styles and effects"
+          preview={<CardPreview />}
+          code={codeExample}
+        />
+
+        {/* Installation */}
+        <InstallScript componentName="card" />
+      </FlexColSpacing>
+    </PageContainer>
   )
 }

@@ -2,6 +2,7 @@
 
 import { BorderBeam } from '@/components/magicui/border-beam'
 import { Card as ShadcnCard } from '@/components/ui/card'
+import { CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 import { cn } from '@/lib/utils'
 import { cva, type VariantProps } from 'class-variance-authority'
 import * as React from 'react'
@@ -44,6 +45,14 @@ interface CardProps
   extends React.ComponentProps<typeof ShadcnCard>,
     VariantProps<typeof cardVariants> {
   /**
+   * Card title - if provided, renders a CardHeader with CardTitle
+   */
+  title?: string
+  /**
+   * Card description - if provided, renders a CardDescription within CardHeader
+   */
+  description?: string
+  /**
    * Border beam configuration options
    */
   laserProps?: {
@@ -58,6 +67,8 @@ interface CardProps
 }
 
 function Card({
+  title,
+  description,
   laser,
   gradient,
   shadow,
@@ -82,6 +93,12 @@ function Card({
       )}
       {...props}
     >
+      {(title || description) && (
+        <CardHeader>
+          {title && <CardTitle>{title}</CardTitle>}
+          {description && <CardDescription>{description}</CardDescription>}
+        </CardHeader>
+      )}
       {children}
       {laser && (
         <BorderBeam
