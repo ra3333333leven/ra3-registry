@@ -53,6 +53,14 @@ export const registry: Registry = [
     ],
   },
   {
+    name: 'dialog',
+    type: 'registry:ui',
+    description:
+      'Enhanced dialog component with simplified props for title, description, and flexible actions',
+    files: [{ path: 'ra3-ui/dialog.tsx', type: 'registry:ui' }],
+    registryDependencies: ['dialog', 'button'],
+  },
+  {
     name: 'loading',
     type: 'registry:ui',
     description:
