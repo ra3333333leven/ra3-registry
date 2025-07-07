@@ -6,24 +6,24 @@ import { Spinner } from './loading'
 import { MoveRight } from 'lucide-react'
 import { useState } from 'react'
 
-// Conditional types to ensure loadingText can only be used when isLoading is provided
+// Conditional types to ensure loadingText can only be used when loading is provided
 type ButtonProps = React.ComponentProps<typeof ShadcnButton> & {
   withArrow?: boolean
   rounded?: boolean
 } & (
     | {
-        isLoading: boolean
+        loading: boolean
         loadingText?: string
       }
     | {
-        isLoading?: never
+        loading?: never
         loadingText?: never
       }
   )
 
 /**
  * A button component that extends ShadcnButton with loading state functionality.
- * @param isLoading - Boolean to control spinner visibility and button disabled state
+ * @param loading - Boolean to control spinner visibility and button disabled state
  * @param loadingText - Optional text to show alongside spinner when loading
  * @param withArrow - Boolean to show an animated arrow that transforms into spinner when loading
  * @param rounded - Boolean to apply rounded-full styling
@@ -31,7 +31,7 @@ type ButtonProps = React.ComponentProps<typeof ShadcnButton> & {
 function Button({
   className,
   children,
-  isLoading,
+  loading,
   loadingText,
   disabled,
   withArrow,
@@ -55,16 +55,16 @@ function Button({
   return (
     <ShadcnButton
       className={cn('rounded-2xl', rounded && 'rounded-full', className)}
-      disabled={isLoading || disabled}
+      disabled={loading || disabled}
       onMouseEnter={withArrow ? handleMouseEnter : onMouseEnter}
       onMouseLeave={withArrow ? handleMouseLeave : onMouseLeave}
       {...props}
     >
-      {isLoading && !withArrow && <Spinner size="sm" />}
-      {isLoading && loadingText ? loadingText : children}
+      {loading && !withArrow && <Spinner size="sm" />}
+      {loading && loadingText ? loadingText : children}
       {withArrow && (
         <>
-          {isLoading ? (
+          {loading ? (
             <Spinner size="sm" />
           ) : (
             <MoveRight

@@ -11,21 +11,21 @@ import { Button } from '@/registry/ra3-ui/button'
 import { useState } from 'react'
 
 export default function Example() {
-  const [isLoading, setIsLoading] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   const handleClick = () => {
-    setIsLoading(true)
-    setTimeout(() => setIsLoading(false), 2000)
+    setLoading(true)
+    setTimeout(() => setLoading(false), 2000)
   }
 
   return (
     <div className="space-y-4">
       {/* Loading States */}
       <div className="flex gap-2">
-        <Button isLoading={isLoading} onClick={handleClick}>
+        <Button loading={loading} onClick={handleClick}>
           Click to Load
         </Button>
-        <Button isLoading={isLoading} loadingText="Processing..." onClick={handleClick}>
+        <Button loading={loading} loadingText="Processing..." onClick={handleClick}>
           With Loading Text
         </Button>
       </div>
@@ -33,7 +33,7 @@ export default function Example() {
       {/* With Arrow Animation */}
       <div className="flex gap-2">
         <Button withArrow>Hover me</Button>
-        <Button withArrow isLoading={isLoading} onClick={handleClick}>
+        <Button withArrow loading={loading} onClick={handleClick}>
           Arrow with Loading
         </Button>
       </div>
@@ -48,10 +48,10 @@ export default function Example() {
 }`
 
 function ButtonPreview() {
-  const [isLoading1, setIsLoading1] = useState(false)
-  const [isLoading2, setIsLoading2] = useState(false)
-  const [isLoading3, setIsLoading3] = useState(false)
-  const [isLoading4, setIsLoading4] = useState(false)
+  const [loading1, setLoading1] = useState(false)
+  const [loading2, setLoading2] = useState(false)
+  const [loading3, setLoading3] = useState(false)
+  const [loading4, setLoading4] = useState(false)
 
   const handleClick = (
     setLoading: (loading: boolean) => void,
@@ -72,15 +72,15 @@ function ButtonPreview() {
         </p>
         <div className="flex flex-wrap gap-2">
           <Button
-            isLoading={isLoading1}
-            onClick={() => handleClick(setIsLoading1, isLoading1)}
+            loading={loading1}
+            onClick={() => handleClick(setLoading1, loading1)}
           >
             Click to Load
           </Button>
           <Button
-            isLoading={isLoading2}
+            loading={loading2}
             loadingText="Loading..."
-            onClick={() => handleClick(setIsLoading2, isLoading2)}
+            onClick={() => handleClick(setLoading2, loading2)}
           >
             With Loading Text
           </Button>
@@ -96,16 +96,16 @@ function ButtonPreview() {
           <Button withArrow>Hover me</Button>
           <Button
             withArrow
-            isLoading={isLoading3}
-            onClick={() => handleClick(setIsLoading3, isLoading3)}
+            loading={loading3}
+            onClick={() => handleClick(setLoading3, loading3)}
           >
             Click to Load
           </Button>
           <Button
             withArrow
-            isLoading={isLoading4}
+            loading={loading4}
             loadingText="Loading..."
-            onClick={() => handleClick(setIsLoading4, isLoading4)}
+            onClick={() => handleClick(setLoading4, loading4)}
           >
             With Loading Text
           </Button>

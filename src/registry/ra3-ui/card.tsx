@@ -3,25 +3,46 @@
 import { BorderBeam } from '@/components/magicui/border-beam'
 import { Card as ShadcnCard } from '@/components/ui/card'
 import { cn } from '@/lib/utils'
+import { cva, type VariantProps } from 'class-variance-authority'
 import * as React from 'react'
 
-interface CardProps extends React.ComponentProps<typeof ShadcnCard> {
-  /**
-   * Whether to add the laser border beam effect
-   */
-  laser?: boolean
-  /**
-   * Whether to add a gradient background using primary colors
-   */
-  gradient?: boolean
-  /**
-   * Whether to add a shadow effect
-   */
-  shadow?: boolean
-  /**
-   * Whether to add hover animations (scale and enhanced shadow)
-   */
-  hoverAnimation?: boolean
+const OUTLINE = 'border-primary'
+
+const cardVariants = cva('', {
+  variants: {
+    laser: {
+      true: 'relative overflow-hidden',
+      false: '',
+    },
+    gradient: {
+      true: 'bg-gradient-to-br from-primary/10 via-primary/5 to-background',
+      false: '',
+    },
+    shadow: {
+      true: 'shadow-md',
+      false: 'shadow-none',
+    },
+    hoverAnimation: {
+      true: 'transition-all duration-200 hover:scale-105 hover:shadow-lg',
+      false: '',
+    },
+    outline: {
+      true: OUTLINE,
+      false: '',
+    },
+  },
+  defaultVariants: {
+    laser: false,
+    gradient: false,
+    shadow: false,
+    hoverAnimation: false,
+    outline: false,
+  },
+})
+
+interface CardProps
+  extends React.ComponentProps<typeof ShadcnCard>,
+    VariantProps<typeof cardVariants> {
   /**
    * Border beam configuration options
    */
@@ -37,10 +58,11 @@ interface CardProps extends React.ComponentProps<typeof ShadcnCard> {
 }
 
 function Card({
-  laser = false,
-  gradient = false,
-  shadow = false,
-  hoverAnimation = false,
+  laser,
+  gradient,
+  shadow,
+  hoverAnimation,
+  outline,
   laserProps,
   className,
   children,
@@ -49,12 +71,13 @@ function Card({
   return (
     <ShadcnCard
       className={cn(
-        laser && 'relative overflow-hidden',
-        gradient &&
-          'bg-gradient-to-br from-primary/10 via-primary/5 to-background',
-        shadow ? 'shadow-md' : 'shadow-none',
-        hoverAnimation &&
-          'transition-all duration-200 hover:scale-105 hover:shadow-lg',
+        cardVariants({
+          laser,
+          gradient,
+          shadow,
+          hoverAnimation,
+          outline,
+        }),
         className
       )}
       {...props}

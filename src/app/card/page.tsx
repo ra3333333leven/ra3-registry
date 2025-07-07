@@ -62,6 +62,17 @@ export default function Example() {
         </CardContent>
       </Card>
 
+      {/* Card with Outline */}
+      <Card outline>
+        <CardHeader>
+          <CardTitle>Outline Card</CardTitle>
+          <CardDescription>Card with primary border outline</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <p>This card has a primary color border outline.</p>
+        </CardContent>
+      </Card>
+
       {/* Card with Laser Border */}
       <Card laser>
         <CardHeader>
@@ -70,17 +81,6 @@ export default function Example() {
         </CardHeader>
         <CardContent>
           <p>This card has an animated laser border effect.</p>
-        </CardContent>
-      </Card>
-
-      {/* Card with All Effects */}
-      <Card laser gradient shadow hoverAnimation>
-        <CardHeader>
-          <CardTitle>All Effects Card</CardTitle>
-          <CardDescription>Card with all effects combined</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <p>This card combines all available effects.</p>
         </CardContent>
       </Card>
 
@@ -101,6 +101,17 @@ export default function Example() {
         </CardHeader>
         <CardContent>
           <p>This card has custom laser border colors and animation.</p>
+        </CardContent>
+      </Card>
+
+      {/* Card with All Effects */}
+      <Card laser gradient shadow hoverAnimation>
+        <CardHeader>
+          <CardTitle>All Effects Card</CardTitle>
+          <CardDescription>Card with all effects combined</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <p>This card combines all available effects.</p>
         </CardContent>
       </Card>
     </div>
@@ -180,6 +191,24 @@ function CardPreview() {
       </div>
 
       <div>
+        <h4 className="text-base font-medium mb-1">Outline Border</h4>
+        <p className="text-base text-muted-foreground mb-3">
+          Card with primary color border outline
+        </p>
+        <Card outline>
+          <CardHeader>
+            <CardTitle>Outline Card</CardTitle>
+            <CardDescription>Card with primary border outline</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <p>
+              This card has a clean primary color border outline for emphasis.
+            </p>
+          </CardContent>
+        </Card>
+      </div>
+
+      <div>
         <h4 className="text-base font-medium mb-1">Laser Border</h4>
         <p className="text-base text-muted-foreground mb-3">
           Card with animated laser border effect
@@ -199,25 +228,6 @@ function CardPreview() {
       </div>
 
       <div>
-        <h4 className="text-base font-medium mb-1">All Effects Combined</h4>
-        <p className="text-base text-muted-foreground mb-3">
-          Card with all effects
-        </p>
-        <Card laser gradient shadow hoverAnimation>
-          <CardHeader>
-            <CardTitle>All Effects Card</CardTitle>
-            <CardDescription>Card with all effects combined</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <p>
-              This card combines all available effects for maximum visual
-              impact.
-            </p>
-          </CardContent>
-        </Card>
-      </div>
-
-      <div className="lg:col-span-2">
         <h4 className="text-base font-medium mb-1">Custom Laser Properties</h4>
         <p className="text-base text-muted-foreground mb-3">
           Card with customized laser effects
@@ -231,7 +241,6 @@ function CardPreview() {
             colorTo: '#4ecdc4',
             borderWidth: 2,
           }}
-          className="max-w-md"
         >
           <CardHeader>
             <CardTitle>Custom Laser Card</CardTitle>
@@ -243,6 +252,25 @@ function CardPreview() {
             <p>
               This card has custom laser border colors (red to teal) and slower
               animation.
+            </p>
+          </CardContent>
+        </Card>
+      </div>
+
+      <div>
+        <h4 className="text-base font-medium mb-1">All Effects Combined</h4>
+        <p className="text-base text-muted-foreground mb-3">
+          Card with all effects
+        </p>
+        <Card laser gradient shadow hoverAnimation>
+          <CardHeader>
+            <CardTitle>All Effects Card</CardTitle>
+            <CardDescription>Card with all effects combined</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <p>
+              This card combines all available effects for maximum visual
+              impact.
             </p>
           </CardContent>
         </Card>
