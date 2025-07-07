@@ -10,6 +10,14 @@ import { toInternalRegistryUrl } from './registry-utils'
  */
 export const registry: Registry = [
   {
+    name: 'alert-dialog',
+    type: 'registry:ui',
+    description:
+      'Enhanced alert dialog component with simplified props for title, description, and actions',
+    files: [{ path: 'ra3-ui/alert-dialog.tsx', type: 'registry:ui' }],
+    registryDependencies: ['alert-dialog'],
+  },
+  {
     name: 'button',
     type: 'registry:ui',
     description:

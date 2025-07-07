@@ -5,7 +5,7 @@ import { ThemeProvider } from '@/registry/ra3-ui/theme-provider'
 import { Home, Navigation } from 'lucide-react'
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
-import { Toaster } from 'sonner'
+import { Toaster } from '@/components/ui/sonner'
 import './globals.css'
 
 const geistSans = Geist({
@@ -58,7 +58,7 @@ export default function RootLayout({
             </main>
             <AppSidebar side="right" />
           </SidebarProvider>
-          <Toaster />
+          <Toaster richColors position="top-right" />
         </ThemeProvider>
       </body>
     </html>
