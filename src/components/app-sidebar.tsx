@@ -1,8 +1,8 @@
 'use client'
 
-import { PanelLeftIcon, PanelRightIcon } from 'lucide-react'
+import { PanelLeftIcon, PanelRightIcon, SearchIcon } from 'lucide-react'
 import * as React from 'react'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 
 import {
   Sidebar,
@@ -18,7 +18,16 @@ import {
   SidebarRail,
   useSidebar,
 } from '@/components/ui/sidebar'
+import {
+  CommandDialog,
+  CommandInput,
+  CommandList,
+  CommandEmpty,
+  CommandGroup,
+  CommandItem,
+} from '@/components/ui/command'
 import { cn, generateNavigation } from '@/lib/utils'
+import { registry } from '@/registry'
 
 // Navigation types
 type NavItem = {
@@ -78,14 +87,32 @@ export function AppSidebarTrigger({
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const pathname = usePathname()
+  const router = useRouter()
+  const [commandOpen, setCommandOpen] = React.useState(false)
+
+  // Handle component selection
+  const handleComponentSelect = (componentName: string) => {
+    router.push(`/${componentName}`)
+    setCommandOpen(false)
+  }
 
   return (
     <Sidebar {...props}>
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupContent>
-            <div className="flex justify-end mb-4 pt-4 pr-6">
-              <AppSidebarTrigger className="border-none bg-transparent shadow-none" />
+            <div className="flex items-center gap-2 mb-4 pt-4 px-2">
+              <button
+                onClick={() => setCommandOpen(true)}
+                className="flex items-center gap-2 flex-1 px-3 py-2 text-sm text-muted-foreground bg-input/60 hover:text-foreground hover:bg-input rounded-md transition-colors"
+              >
+                <SearchIcon className="h-4 w-4" />
+                <span>Search</span>
+                <kbd className="ml-auto text-xs bg-muted px-1.5 py-0.5 rounded">
+                  ⌘K
+                </kbd>
+              </button>
+              <AppSidebarTrigger className="border-none bg-transparent shadow-none p-0" />
             </div>
             <SidebarMenu>
               {data.navMain.map((item) => (
@@ -121,6 +148,60 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         </SidebarGroup>
       </SidebarContent>
       <SidebarRail />
+
+      {/* Command Palette Dialog */}
+      <CommandDialog
+        open={commandOpen}
+        onOpenChange={setCommandOpen}
+        title="Component Search"
+        description="Search and navigate to components"
+      >
+        <CommandInput
+          placeholder="Search components..."
+          className="text-base"
+        />
+        <CommandList>
+          <CommandEmpty className="text-base">
+            No components found.
+          </CommandEmpty>
+          <CommandGroup heading="Components">
+            {registry
+              .filter((item) => item.type === 'registry:ui' && item.name)
+              .map((component) => (
+                <CommandItem
+                  key={component.name}
+                  onSelect={() => handleComponentSelect(component.name!)}
+                  className="cursor-pointer text-base py-3"
+                >
+                  <div className="flex flex-col">
+                    <span className="font-medium">{component.name}</span>
+                    <span className="text-sm text-muted-foreground">
+                      {component.description}
+                    </span>
+                  </div>
+                </CommandItem>
+              ))}
+          </CommandGroup>
+          <CommandGroup heading="Hooks">
+            {registry
+              .filter((item) => item.type === 'registry:hook' && item.name)
+              .map((component) => (
+                <CommandItem
+                  key={component.name}
+                  onSelect={() => handleComponentSelect(component.name!)}
+                  className="cursor-pointer text-base py-3"
+                >
+                  <div className="flex flex-col">
+                    <span className="font-medium">{component.name}</span>
+                    <span className="text-sm text-muted-foreground">
+                      {component.description}
+                    </span>
+                  </div>
+                </CommandItem>
+              ))}
+          </CommandGroup>
+        </CommandList>
+      </CommandDialog>
     </Sidebar>
   )
 }

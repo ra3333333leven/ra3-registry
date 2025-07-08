@@ -138,4 +138,13 @@ export const registry: Registry = [
     files: [{ path: 'hooks/use-copy-to-clipboard.ts', type: 'registry:hook' }],
     dependencies: ['sonner'],
   },
+  {
+    name: 'floating-toolbar',
+    type: 'registry:ui',
+    description:
+      'Floating toolbar with command palette (⌘K) and sidebar toggle',
+    files: [{ path: 'ra3-ui/floating-toolbar.tsx', type: 'registry:ui' }],
+    dependencies: ['lucide-react'],
+    registryDependencies: ['command', 'sidebar'],
+  },
 ]

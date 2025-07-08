@@ -1,5 +1,6 @@
-import { AppSidebar, AppSidebarTrigger } from '@/components/app-sidebar'
+import { AppSidebar } from '@/components/app-sidebar'
 import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar'
+import { FloatingToolbar } from '@/components/floating-toolbar'
 import { NavBar } from '@/registry/ra3-ui/navbar'
 import { ThemeProvider } from '@/registry/ra3-ui/theme-provider'
 import { Home, Navigation } from 'lucide-react'
@@ -48,10 +49,9 @@ export default function RootLayout({
             <NavBar navigationItems={navigationItems} withThemeToggle />
             <main className="h-dvh w-dvw overflow-x-hidden">
               <SidebarInset>
-                <AppSidebarTrigger
-                  className="fixed right-6 top-6 z-50"
-                  disappearWhenOpen
-                  highlightWhenOpen
+                <FloatingToolbar
+                  disappearWhenSidebarOpen
+                  highlightWhenSidebarOpen
                 />
                 {children}
               </SidebarInset>
