@@ -15,6 +15,20 @@ import { cn } from '@/lib/utils'
 import { cva, type VariantProps } from 'class-variance-authority'
 import * as React from 'react'
 
+const ConditionalDialogClose = ({
+  shouldClose,
+  children,
+}: {
+  shouldClose: boolean
+  children: React.ReactNode
+}) => {
+  return shouldClose ? (
+    <DialogClose asChild>{children}</DialogClose>
+  ) : (
+    <>{children}</>
+  )
+}
+
 const dialogVariants = cva('', {
   variants: {
     size: {
@@ -29,6 +43,7 @@ const dialogVariants = cva('', {
       '6xl': 'sm:max-w-6xl',
       '7xl': 'sm:max-w-7xl',
       full: 'sm:max-w-full',
+      screen: 'h-dvh min-w-full flex flex-col items-center justify-between',
     },
   },
   defaultVariants: {
@@ -48,7 +63,7 @@ interface DialogProps
    */
   description?: string
   /**
-   * Primary action button - can be either a function that executes on click or a React component
+   * Primary action - can be either a function that executes on click or a React component
    */
   primaryAction?: (() => void) | React.ReactNode
   /**
@@ -56,13 +71,25 @@ interface DialogProps
    */
   primaryActionText?: string
   /**
-   * Secondary action button - can be either a function that executes on click or a React component
+   * Whether the primary action button should close the dialog when clicked, defaults to true
+   */
+  primaryActionClose?: boolean
+  /**
+   * Secondary action - can be either a function that executes on click or a React component
    */
   secondaryAction?: (() => void) | React.ReactNode
   /**
    * Secondary action button text - used when secondaryAction is a function, defaults to "Cancel"
    */
   secondaryActionText?: string
+  /**
+   * Whether the secondary action button should close the dialog when clicked, defaults to true
+   */
+  secondaryActionClose?: boolean
+  /**
+   * Whether to show the cancel/secondary action button, defaults to true when secondaryAction is provided
+   */
+  showCancelButton?: boolean
   /**
    * Whether to show the close button in the header
    */
@@ -86,8 +113,11 @@ function Dialog({
   description,
   primaryAction,
   primaryActionText = 'Save',
+  primaryActionClose = true,
   secondaryAction,
   secondaryActionText = 'Cancel',
+  secondaryActionClose = true,
+  showCancelButton = true,
   showCloseButton = true,
   trigger,
   size,
@@ -129,29 +159,37 @@ function Dialog({
           </DialogHeader>
         )}
         {children}
-        {(primaryAction || secondaryAction) && (
+        {(primaryAction || secondaryAction || showCancelButton) && (
           <DialogFooter>
-            {secondaryAction && (
+            {showCancelButton && (
               <>
-                {typeof secondaryAction === 'function' ? (
-                  <DialogClose asChild>
+                {secondaryAction && typeof secondaryAction === 'function' ? (
+                  <ConditionalDialogClose shouldClose={secondaryActionClose}>
                     <Button variant="outline" onClick={handleSecondaryAction}>
                       {secondaryActionText}
                     </Button>
-                  </DialogClose>
-                ) : (
+                  </ConditionalDialogClose>
+                ) : secondaryAction && React.isValidElement(secondaryAction) ? (
                   <>{secondaryAction}</>
+                ) : (
+                  <DialogClose asChild>
+                    <Button variant="outline">{secondaryActionText}</Button>
+                  </DialogClose>
                 )}
               </>
             )}
             {primaryAction && (
               <>
                 {typeof primaryAction === 'function' ? (
-                  <Button onClick={handlePrimaryAction}>
-                    {primaryActionText}
-                  </Button>
+                  <ConditionalDialogClose shouldClose={primaryActionClose}>
+                    <Button onClick={handlePrimaryAction}>
+                      {primaryActionText}
+                    </Button>
+                  </ConditionalDialogClose>
                 ) : (
-                  <>{primaryAction}</>
+                  <ConditionalDialogClose shouldClose={primaryActionClose}>
+                    {primaryAction}
+                  </ConditionalDialogClose>
                 )}
               </>
             )}

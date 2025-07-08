@@ -1,6 +1,7 @@
 'use client'
 
 import { ComponentPreview } from '@/components/(shared)/component-preview'
+import { CodeExample } from '@/components/(shared)/code-example'
 import { TitleDesc } from '@/registry/ra3-ui/typography'
 import { InstallScript } from '@/components/(shared)/install-script'
 import { PageContainer, FlexColSpacing } from '@/registry/ra3-ui/container'
@@ -8,305 +9,8 @@ import { Dialog } from '@/registry/ra3-ui/dialog'
 import { Button } from '@/components/ui/button'
 import { DialogClose } from '@/components/ui/dialog'
 import { getNameFromRegistry, getDescriptionFromRegistry } from '@/lib/utils'
-import { Settings, User, X, FileText, Edit3, Trash2 } from 'lucide-react'
+import { Settings, Edit3, Trash2, Save } from 'lucide-react'
 import { toast } from 'sonner'
-
-const codeExample = `'use client'
-
-import { Dialog } from '@/registry/ra3-ui/dialog'
-import { Button } from '@/components/ui/button'
-import { DialogClose } from '@/components/ui/dialog'
-import { Settings, User, Save, X, FileText, Edit3 } from 'lucide-react'
-import { toast } from 'sonner'
-
-export default function Example() {
-  const handleSave = () => {
-    toast.success('Settings saved!')
-  }
-
-  const handleDelete = () => {
-    toast.error('Profile deleted!')
-  }
-
-  const handleUpdate = () => {
-    toast.success('Profile updated!')
-  }
-
-  return (
-    <div className="space-y-6">
-      {/* Basic Dialog with Function Actions */}
-      <Dialog
-        title="Edit Settings"
-        description="Make changes to your account settings here."
-        primaryAction={handleSave}
-        primaryActionText="Save Changes"
-        secondaryAction={() => toast.info('Changes cancelled')}
-        secondaryActionText="Cancel"
-        trigger={
-          <Button>
-            <Settings className="w-4 h-4 mr-2" />
-            Edit Settings
-          </Button>
-        }
-      >
-        <div className="space-y-4">
-          <div className="space-y-2">
-            <label className="text-sm font-medium">Username</label>
-            <input className="w-full p-2 border rounded-md" defaultValue="john_doe" />
-          </div>
-          <div className="space-y-2">
-            <label className="text-sm font-medium">Email</label>
-            <input className="w-full p-2 border rounded-md" defaultValue="john@example.com" />
-          </div>
-        </div>
-      </Dialog>
-
-      {/* Dialog with Custom Action Components */}
-      <Dialog
-        title="Delete Profile"
-        description="This action cannot be undone. Are you sure you want to delete your profile?"
-        primaryAction={
-          <Button variant="destructive" onClick={handleDelete}>
-            <Trash2 className="w-4 h-4 mr-2" />
-            Delete Forever
-          </Button>
-        }
-        secondaryAction={
-          <DialogClose asChild>
-            <Button variant="outline">
-              <X className="w-4 h-4 mr-2" />
-              Keep Profile
-            </Button>
-          </DialogClose>
-        }
-        trigger={
-          <Button variant="destructive">
-            <User className="w-4 h-4 mr-2" />
-            Delete Profile
-          </Button>
-        }
-      >
-        <div className="p-4 bg-red-50 rounded-md">
-          <p className="text-sm text-red-700">
-            Warning: This will permanently delete your profile and all associated data.
-          </p>
-        </div>
-      </Dialog>
-
-      {/* Large Dialog with Rich Content */}
-      <Dialog
-        title="Create New Document"
-        description="Choose a template and configure your new document."
-        size="2xl"
-        primaryAction={handleUpdate}
-        primaryActionText="Create Document"
-        trigger={
-          <Button>
-            <FileText className="w-4 h-4 mr-2" />
-            New Document
-          </Button>
-        }
-      >
-        <div className="space-y-6">
-          <div className="grid grid-cols-2 gap-4">
-            <div className="p-4 border rounded-lg cursor-pointer hover:bg-muted">
-              <h3 className="font-medium">Blank Document</h3>
-              <p className="text-sm text-muted-foreground">Start with a clean slate</p>
-            </div>
-            <div className="p-4 border rounded-lg cursor-pointer hover:bg-muted">
-              <h3 className="font-medium">Report Template</h3>
-              <p className="text-sm text-muted-foreground">Pre-formatted report layout</p>
-            </div>
-          </div>
-          <div className="space-y-2">
-            <label className="text-sm font-medium">Document Name</label>
-            <input className="w-full p-2 border rounded-md" placeholder="Enter document name" />
-          </div>
-        </div>
-      </Dialog>
-
-      {/* Dialog without Footer Actions */}
-      <Dialog
-        title="Information"
-        description="This dialog only displays information."
-        showCloseButton={true}
-        trigger={
-          <Button variant="outline">
-            Info Dialog
-          </Button>
-        }
-      >
-        <div className="space-y-4">
-          <p>This is an informational dialog that doesn't require any actions.</p>
-          <p className="text-sm text-muted-foreground">
-            Users can close it using the X button or by clicking outside.
-          </p>
-        </div>
-      </Dialog>
-    </div>
-  )
-}`
-
-function DialogPreview() {
-  const handleSave = () => {
-    toast.success('Settings saved!')
-  }
-
-  const handleDelete = () => {
-    toast.error('Profile deleted!')
-  }
-
-  const handleUpdate = () => {
-    toast.success('Document created!')
-  }
-
-  return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <div>
-        <h4 className="text-base font-medium mb-1">Function Actions</h4>
-        <p className="text-base text-muted-foreground mb-3">
-          Dialog with function-based primary and secondary actions
-        </p>
-        <Dialog
-          title="Edit Settings"
-          description="Make changes to your account settings here."
-          primaryAction={handleSave}
-          primaryActionText="Save Changes"
-          secondaryAction={() => toast.info('Changes cancelled')}
-          secondaryActionText="Cancel"
-          trigger={
-            <Button>
-              <Settings className="w-4 h-4 mr-2" />
-              Edit Settings
-            </Button>
-          }
-        >
-          <div className="space-y-4">
-            <div className="space-y-2">
-              <label className="text-sm font-medium">Username</label>
-              <input
-                className="w-full p-2 border rounded-md"
-                defaultValue="john_doe"
-              />
-            </div>
-            <div className="space-y-2">
-              <label className="text-sm font-medium">Email</label>
-              <input
-                className="w-full p-2 border rounded-md"
-                defaultValue="john@example.com"
-              />
-            </div>
-          </div>
-        </Dialog>
-      </div>
-
-      <div>
-        <h4 className="text-base font-medium mb-1">Custom Action Components</h4>
-        <p className="text-base text-muted-foreground mb-3">
-          Dialog with custom React components as actions
-        </p>
-        <Dialog
-          title="Delete Profile"
-          description="This action cannot be undone. Are you sure?"
-          primaryAction={
-            <Button variant="destructive" onClick={handleDelete}>
-              <Trash2 className="w-4 h-4 mr-2" />
-              Delete Forever
-            </Button>
-          }
-          secondaryAction={
-            <DialogClose asChild>
-              <Button variant="outline">
-                <X className="w-4 h-4 mr-2" />
-                Keep Profile
-              </Button>
-            </DialogClose>
-          }
-          trigger={
-            <Button variant="destructive">
-              <User className="w-4 h-4 mr-2" />
-              Delete Profile
-            </Button>
-          }
-        >
-          <div className="p-4 bg-red-50 rounded-md">
-            <p className="text-sm text-red-700">
-              Warning: This will permanently delete your profile and all
-              associated data.
-            </p>
-          </div>
-        </Dialog>
-      </div>
-
-      <div>
-        <h4 className="text-base font-medium mb-1">Large Dialog</h4>
-        <p className="text-base text-muted-foreground mb-3">
-          Dialog with custom size and rich content
-        </p>
-        <Dialog
-          title="Create New Document"
-          description="Choose a template and configure your new document."
-          size="xl"
-          primaryAction={handleUpdate}
-          primaryActionText="Create Document"
-          trigger={
-            <Button>
-              <FileText className="w-4 h-4 mr-2" />
-              New Document
-            </Button>
-          }
-        >
-          <div className="space-y-4">
-            <div className="grid grid-cols-1 gap-4">
-              <div className="p-4 border rounded-lg cursor-pointer hover:bg-muted">
-                <h3 className="font-medium">Blank Document</h3>
-                <p className="text-sm text-muted-foreground">
-                  Start with a clean slate
-                </p>
-              </div>
-              <div className="p-4 border rounded-lg cursor-pointer hover:bg-muted">
-                <h3 className="font-medium">Report Template</h3>
-                <p className="text-sm text-muted-foreground">
-                  Pre-formatted report layout
-                </p>
-              </div>
-            </div>
-            <div className="space-y-2">
-              <label className="text-sm font-medium">Document Name</label>
-              <input
-                className="w-full p-2 border rounded-md"
-                placeholder="Enter document name"
-              />
-            </div>
-          </div>
-        </Dialog>
-      </div>
-
-      <div>
-        <h4 className="text-base font-medium mb-1">Info Only Dialog</h4>
-        <p className="text-base text-muted-foreground mb-3">
-          Dialog without footer actions
-        </p>
-        <Dialog
-          title="Information"
-          description="This dialog only displays information."
-          showCloseButton={true}
-          trigger={<Button variant="outline">Info Dialog</Button>}
-        >
-          <div className="space-y-4">
-            <p>
-              This is an informational dialog that doesn&apos;t require any
-              actions.
-            </p>
-            <p className="text-sm text-muted-foreground">
-              Users can close it using the X button or by clicking outside.
-            </p>
-          </div>
-        </Dialog>
-      </div>
-    </div>
-  )
-}
 
 export default function DialogPage() {
   return (
@@ -318,18 +22,14 @@ export default function DialogPage() {
           description={getDescriptionFromRegistry('dialog')}
         />
 
-        {/* Basic Usage Demo */}
+        {/* Basic Dialog Usage */}
         <ComponentPreview
-          title="Basic Dialog Usage"
-          description="Simple dialog with title, description, and action functions"
+          title="Basic Dialog"
+          description="Simple dialog with title, description, and children content"
           preview={
             <Dialog
               title="Edit Profile"
-              description="Make changes to your profile here. Click save when you're done."
-              primaryAction={() => toast.success('Profile updated!')}
-              primaryActionText="Save Changes"
-              secondaryAction={() => toast.info('Changes cancelled')}
-              secondaryActionText="Cancel"
+              description="Make changes to your profile information"
               trigger={
                 <Button>
                   <Edit3 className="w-4 h-4 mr-2" />
@@ -346,66 +46,288 @@ export default function DialogPage() {
                   />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-sm font-medium">Bio</label>
-                  <textarea
+                  <label className="text-sm font-medium">Email</label>
+                  <input
                     className="w-full p-2 border rounded-md"
-                    rows={3}
-                    defaultValue="Software developer passionate about creating great user experiences."
+                    defaultValue="john@example.com"
                   />
                 </div>
               </div>
             </Dialog>
           }
+          code={`<Dialog
+  title="Edit Profile"
+  description="Make changes to your profile information"
+  trigger={<Button>Edit Profile</Button>}
+>
+  <div className="space-y-4">
+    <div className="space-y-2">
+      <label className="text-sm font-medium">Name</label>
+      <input className="w-full p-2 border rounded-md" defaultValue="John Doe" />
+    </div>
+    <div className="space-y-2">
+      <label className="text-sm font-medium">Email</label>
+      <input className="w-full p-2 border rounded-md" defaultValue="john@example.com" />
+    </div>
+  </div>
+</Dialog>`}
+        />
+
+        {/* Dialog Sizes */}
+        <ComponentPreview
+          title="Dialog Sizes"
+          description="Control dialog size using the size prop"
+          preview={
+            <div className="flex flex-wrap gap-4">
+              <Dialog
+                title="Small Dialog"
+                description="This is a small dialog"
+                size="sm"
+                trigger={<Button variant="outline">Small</Button>}
+              >
+                <p>Small dialog content</p>
+              </Dialog>
+
+              <Dialog
+                title="Large Dialog"
+                description="This is a large dialog"
+                size="xl"
+                trigger={<Button variant="outline">Large</Button>}
+              >
+                <p>Large dialog content with more space</p>
+              </Dialog>
+
+              <Dialog
+                title="Full Screen Dialog"
+                description="This dialog takes up the entire screen"
+                size="screen"
+                trigger={<Button variant="outline">Full Screen</Button>}
+              >
+                <div className="p-8">
+                  <p>Full screen dialog content</p>
+                </div>
+              </Dialog>
+            </div>
+          }
+          code={`// Small dialog
+<Dialog size="sm" title="Small Dialog" trigger={<Button>Small</Button>}>
+  <p>Small dialog content</p>
+</Dialog>
+
+// Large dialog
+<Dialog size="xl" title="Large Dialog" trigger={<Button>Large</Button>}>
+  <p>Large dialog content</p>
+</Dialog>
+
+// Full screen dialog
+<Dialog size="screen" title="Full Screen" trigger={<Button>Full Screen</Button>}>
+  <div className="p-8">
+    <p>Full screen dialog content</p>
+  </div>
+</Dialog>`}
+        />
+
+        {/* Dialog with Actions */}
+        <ComponentPreview
+          title="Dialog with Actions"
+          description="Add primary and secondary actions to your dialog"
+          preview={
+            <div className="flex flex-wrap gap-4">
+              <Dialog
+                title="Save Changes"
+                description="Do you want to save your changes?"
+                primaryAction={() => toast.success('Changes saved!')}
+                primaryActionText="Save"
+                trigger={
+                  <Button>
+                    <Save className="w-4 h-4 mr-2" />
+                    Save Dialog
+                  </Button>
+                }
+              >
+                <p>Your changes will be saved to the database.</p>
+              </Dialog>
+
+              <Dialog
+                title="Delete Item"
+                description="This action cannot be undone"
+                primaryAction={() => toast.error('Item deleted!')}
+                primaryActionText="Delete"
+                secondaryAction={() => toast.info('Cancelled')}
+                secondaryActionText="Cancel"
+                trigger={
+                  <Button variant="destructive">
+                    <Trash2 className="w-4 h-4 mr-2" />
+                    Delete
+                  </Button>
+                }
+              >
+                <p>Are you sure you want to delete this item?</p>
+              </Dialog>
+            </div>
+          }
+          code={`// Dialog with primary action only
+<Dialog
+  title="Save Changes"
+  primaryAction={() => handleSave()}
+  primaryActionText="Save"
+  trigger={<Button>Save Dialog</Button>}
+>
+  <p>Your changes will be saved.</p>
+</Dialog>
+
+// Dialog with primary and secondary actions
+<Dialog
+  title="Delete Item"
+  primaryAction={() => handleDelete()}
+  primaryActionText="Delete"
+  secondaryAction={() => handleCancel()}
+  secondaryActionText="Cancel"
+  trigger={<Button variant="destructive">Delete</Button>}
+>
+  <p>Are you sure you want to delete this item?</p>
+</Dialog>`}
+        />
+
+        {/* Custom Action Components */}
+        <ComponentPreview
+          title="Custom Action Components"
+          description="Use React components instead of functions for more control"
+          preview={
+            <Dialog
+              title="Custom Actions"
+              description="Dialog with custom action components"
+              primaryAction={
+                <Button onClick={() => toast.success('Custom action!')}>
+                  <Settings className="w-4 h-4 mr-2" />
+                  Custom Primary
+                </Button>
+              }
+              secondaryAction={
+                <DialogClose asChild>
+                  <Button variant="outline">Custom Cancel</Button>
+                </DialogClose>
+              }
+              trigger={<Button variant="outline">Custom Actions</Button>}
+            >
+              <p>This dialog uses custom React components for actions.</p>
+            </Dialog>
+          }
+          code={`<Dialog
+  title="Custom Actions"
+  primaryAction={
+    <Button onClick={handleCustomAction}>
+      <Settings className="w-4 h-4 mr-2" />
+      Custom Primary
+    </Button>
+  }
+  secondaryAction={
+    <DialogClose asChild>
+      <Button variant="outline">Custom Cancel</Button>
+    </DialogClose>
+  }
+  trigger={<Button>Custom Actions</Button>}
+>
+  <p>Custom action components give you full control.</p>
+</Dialog>`}
+        />
+
+        {/* Action Control Options */}
+        <ComponentPreview
+          title="Action Control Options"
+          description="Control action behavior with various flags"
+          preview={
+            <div className="flex flex-wrap gap-4">
+              <Dialog
+                title="Non-Closing Action"
+                description="Action that doesn't close the dialog"
+                primaryAction={() => toast.success('Action executed!')}
+                primaryActionText="Execute"
+                primaryActionClose={false}
+                trigger={<Button variant="outline">Non-Closing</Button>}
+              >
+                <p>The primary action won&apos;t close this dialog.</p>
+              </Dialog>
+
+              <Dialog
+                title="No Cancel Button"
+                description="Dialog without cancel button"
+                primaryAction={() => toast.success('Confirmed!')}
+                primaryActionText="Confirm"
+                showCancelButton={false}
+                trigger={<Button variant="outline">No Cancel</Button>}
+              >
+                <p>This dialog has no cancel button.</p>
+              </Dialog>
+
+              <Dialog
+                title="No Close Button"
+                description="Dialog without X close button"
+                primaryAction={() => toast.success('Done!')}
+                primaryActionText="Done"
+                showCloseButton={false}
+                trigger={<Button variant="outline">No X Button</Button>}
+              >
+                <p>This dialog has no X close button in the header.</p>
+              </Dialog>
+            </div>
+          }
+          code={`// Action that doesn't close dialog
+<Dialog
+  primaryAction={() => handleAction()}
+  primaryActionClose={false}
+  trigger={<Button>Non-Closing</Button>}
+>
+  <p>Action won't close the dialog</p>
+</Dialog>
+
+// Hide cancel button
+<Dialog
+  primaryAction={() => handleAction()}
+  showCancelButton={false}
+  trigger={<Button>No Cancel</Button>}
+>
+  <p>No cancel button shown</p>
+</Dialog>
+
+// Hide X close button
+<Dialog
+  primaryAction={() => handleAction()}
+  showCloseButton={false}
+  trigger={<Button>No X Button</Button>}
+>
+  <p>No X close button in header</p>
+</Dialog>`}
+        />
+
+        {/* Code Examples */}
+        <CodeExample
+          title="Basic Usage"
+          description="Import and use the Dialog component"
           code={`import { Dialog } from '@/registry/ra3-ui/dialog'
 import { Button } from '@/components/ui/button'
-import { Edit3 } from 'lucide-react'
-import { toast } from 'sonner'
 
 export default function Example() {
   const handleSave = () => {
-    toast.success('Profile updated!')
-  }
-
-  const handleCancel = () => {
-    toast.info('Changes cancelled')
+    // Handle save logic
+    console.log('Saving...')
   }
 
   return (
     <Dialog
-      title="Edit Profile"
-      description="Make changes to your profile here. Click save when you&apos;re done."
+      title="Edit Settings"
+      description="Make changes to your settings"
       primaryAction={handleSave}
       primaryActionText="Save Changes"
-      secondaryAction={handleCancel}
-      secondaryActionText="Cancel"
-      trigger={
-        <Button>
-          <Edit3 className="w-4 h-4 mr-2" />
-          Edit Profile
-        </Button>
-      }
+      trigger={<Button>Open Dialog</Button>}
     >
       <div className="space-y-4">
-        <div className="space-y-2">
-          <label className="text-sm font-medium">Name</label>
-          <input className="w-full p-2 border rounded-md" defaultValue="John Doe" />
-        </div>
-        <div className="space-y-2">
-          <label className="text-sm font-medium">Bio</label>
-          <textarea className="w-full p-2 border rounded-md" rows={3} defaultValue="Software developer passionate about creating great user experiences." />
-        </div>
+        <input placeholder="Setting 1" className="w-full p-2 border rounded" />
+        <input placeholder="Setting 2" className="w-full p-2 border rounded" />
       </div>
     </Dialog>
   )
 }`}
-        />
-
-        {/* All Variants Demo */}
-        <ComponentPreview
-          title="Dialog Variants"
-          description="Comprehensive showcase of all dialog styles and configurations"
-          preview={<DialogPreview />}
-          code={codeExample}
         />
 
         {/* Installation */}
