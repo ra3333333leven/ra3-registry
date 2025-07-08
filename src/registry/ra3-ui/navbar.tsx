@@ -7,7 +7,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState, useEffect } from 'react'
 import { useIsMobile } from '@/hooks/use-mobile'
-import { ThemeToggle } from '@/registry/ra3-ui/theme-toggle'
+import { ThemeToggle } from './theme-toggle'
 
 export interface NavigationItem {
   name: string // Required

@@ -1,4 +1,4 @@
-import { TitleDesc } from '@/registry/ra3-ui/typography'
+import { TitleDesc } from './typography'
 import { FullPage, PageContainer, YPadding } from './container'
 import React from 'react'
 

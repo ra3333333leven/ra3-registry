@@ -2,8 +2,8 @@
 
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
-import type { UseCopyToClipboardProps } from '@/registry/hooks/use-copy-to-clipboard'
-import { useCopyToClipboard } from '@/registry/hooks/use-copy-to-clipboard'
+import type { UseCopyToClipboardProps } from '../hooks/use-copy-to-clipboard'
+import { useCopyToClipboard } from '../hooks/use-copy-to-clipboard'
 import { cva } from 'class-variance-authority'
 import { Check, Copy } from 'lucide-react'
 
