@@ -13,7 +13,7 @@ export const registry: Registry = [
     name: 'alert-dialog',
     type: 'registry:ui',
     description:
-      'Enhanced alert dialog component with simplified props for title, description, and actions',
+      'Alert dialog with simplified props for title, description, and actions',
     files: [{ path: 'ra3-ui/alert-dialog.tsx', type: 'registry:ui' }],
     registryDependencies: ['alert-dialog'],
   },
@@ -29,8 +29,7 @@ export const registry: Registry = [
   {
     name: 'card',
     type: 'registry:ui',
-    description:
-      'Enhanced card component with optional laser border, gradient background, and shadow effects',
+    description: 'Card component with title, description, and different styles',
     files: [{ path: 'ra3-ui/card.tsx', type: 'registry:ui' }],
     registryDependencies: ['card'],
   },
@@ -44,7 +43,7 @@ export const registry: Registry = [
     name: 'copy-clip',
     type: 'registry:ui',
     description:
-      'Simple copy-to-clipboard component with visual feedback and optional toasts',
+      'Copy-to-clipboard component with visual feedback and optional toasts',
     files: [{ path: 'ra3-ui/copy-clip.tsx', type: 'registry:ui' }],
     dependencies: ['lucide-react'],
     registryDependencies: [
@@ -55,8 +54,7 @@ export const registry: Registry = [
   {
     name: 'dialog',
     type: 'registry:ui',
-    description:
-      'Enhanced dialog component with simplified props for title, description, and flexible actions',
+    description: 'Dialog component with title, description, and actions',
     files: [{ path: 'ra3-ui/dialog.tsx', type: 'registry:ui' }],
     registryDependencies: ['dialog', 'button'],
   },
@@ -129,8 +127,7 @@ export const registry: Registry = [
   {
     name: 'skeleton',
     type: 'registry:ui',
-    description:
-      'Dynamic skeleton components that automatically resize based on their parent container',
+    description: 'Unified and composable skeleton component',
     files: [{ path: 'ra3-ui/skeleton.tsx', type: 'registry:ui' }],
     registryDependencies: ['skeleton'],
   },
