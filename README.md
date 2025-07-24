@@ -26,3 +26,5 @@ npx shadcn@latest add https://ra3-registry.vercel.app/registry/button.json
 ## NOTES.md
 
 For development notes and component creation instructions, see [NOTES.md](./NOTES.md).
+
+## Contributing
